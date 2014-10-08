@@ -1,0 +1,179 @@
+/* Import the reindeer theme.*/
+/* This only allows us to use the mixins defined in it and does not add any styles by itself. */
+@import "../reindeer/reindeer.scss";
+
+/* This contains all of your theme.*/
+/* If somebody wants to extend the theme she will include this mixin. */
+
+
+
+/* TODO move new notification theme to base as the default when they are ready */
+@import "components/notification.scss";
+@import "components/button.scss";
+@import "components/textfield.scss";
+@import "components/combobox.scss";
+@import "components/tabsheet.scss";
+@import "components/label.scss";
+@import "components/table.scss";
+@import "components/window.scss";
+
+@mixin ims {
+  /* Include all the styles from the reindeer theme */
+  @include reindeer;
+
+  /* Insert your theme rules here */
+    .info
+  {
+  
+  background: #353637;
+  color:#FAFAFA;
+  
+  }
+  
+  .menu {
+  
+   background:#1B83EC;
+   position: relative;
+
+  
+  
+  }
+  
+  .content{
+  
+   background: #CEF6F5;
+  
+  }
+  
+  .footer{
+  background: #6E6E6E;
+  
+  }
+  
+  .university-logo
+  {
+  width: 30px;
+  height: 30px;
+  padding: 4px;
+  
+  }
+  
+  .logout.weel
+  {
+  width: 30px;
+  height: 30px;
+  border: none;
+    background: transparent;
+   -webkit-box-shadow: none;
+   -moz-box-shadow: none;
+   box-shadow: none;
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  	div.login-panel {
+	}
+	
+	.login-panel {
+		background: #fff;		
+		padding: 1em 1em 2em;
+	}
+	
+	.login-panel .labels,
+	.login-panel .fields {
+		display: block;
+	}
+	
+	.login-panel .v-textfield {
+		width: 150px;
+	}
+	
+	.login-panel .h2 {
+		padding: 0;
+		font-size: 20px;
+		color: #c4cacf;
+		letter-spacing: -0.05em;
+	}
+	
+	.login-panel .error {
+		font-size: 13px;
+		height: 20px;
+		padding-left: 14px;
+	}
+	
+		.login-bg {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		
+		background: #353637;
+		
+		/* TODO mixin */
+		background: -moz-radial-gradient(center, ellipse cover, #4c4d4e 0%, #303131 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#4c4d4e), color-stop(100%,#303131));
+		background: -webkit-radial-gradient(center, ellipse cover, #4c4d4e 0%,#303131 100%);
+		background: -o-radial-gradient(center, ellipse cover, #4c4d4e 0%,#303131 100%);
+		background: -ms-radial-gradient(center, ellipse cover, #4c4d4e 0%,#303131 100%);
+	/* 	background: radial-gradient(ellipse at center, #4c4d4e 0%,#303131 100%); */
+	
+		opacity: 0;
+		
+		/* TODO mixin */
+		-webkit-transition: opacity 300ms linear;
+		-moz-transition: opacity 300ms linear;
+		transition: opacity 300ms linear;
+		
+		
+	}
+	
+		.login .login-bg {
+		opacity: 1;
+		
+	}
+	
+	
+	.login
+	{
+	background: #353637;
+	}
+	
+	.submenu
+	{
+	
+	background: #04B486;
+	width:200px
+	
+	}
+	
+	.subcontent
+	{
+	
+	background: #A9F5F2;
+	
+	}
+	
+	.comRegiLable
+	{
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	
+	}
+	
+	.comapnyProfileViewGrid
+	{
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	
+	}
+}

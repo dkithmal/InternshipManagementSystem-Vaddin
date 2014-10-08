@@ -1,0 +1,9 @@
+@import "addons.scss";
+@import "ims.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in ims.scss */
+.ims {
+  @include addons;
+  @include ims;
+}
