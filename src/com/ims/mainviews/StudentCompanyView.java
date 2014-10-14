@@ -4,6 +4,7 @@ import com.ims.ImsUI;
 import com.ims.business.CompanyDAO;
 import com.ims.components.AllowedCompanyViewComp;
 import com.ims.components.CompanyProfileViewComp;
+import com.ims.components.StudentAppliedCompayStateViewComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
@@ -172,7 +173,8 @@ public class StudentCompanyView extends CssLayout implements View{
     private void buildStateOfCompanyView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new Label("this is state of the company view"));
+    	//content.addComponent(new Label("this is state of the company view"));
+        content.addComponent(new StudentAppliedCompayStateViewComp());
     	
     }
     

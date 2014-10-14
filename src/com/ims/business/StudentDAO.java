@@ -2,6 +2,7 @@ package com.ims.business;
 
 import java.util.List;
 
+import com.ims.data.Administration;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,11 +14,22 @@ public class StudentDAO {
 	
 	private SessionFactory sessionFactory;
 
+
+    private int getCurrentStudentBatch()
+    {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Administration administration= (Administration)session.get(Administration.class, 1234);
+        session.close();
+        return administration.getCurrentBatch();
+
+    }
+
 	
 	public List<Student> getAllStudents()
 	{
 		Session session = getSessionFactory().openSession();
-		String SQL_QUERY = "from Student";
+		String SQL_QUERY = "from Student as stu where stu.studentBatch="+getCurrentStudentBatch()+"";
 		Query query = session.createQuery(SQL_QUERY);
 		List<Student> list = ((org.hibernate.Query) query).list();
 
@@ -36,7 +48,33 @@ public class StudentDAO {
 		session2.close();
 		
 	}
-	
+
+
+
+    public List<Student> getStudentsSelectedForInternship()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Student as stu where stu.studentBatch="+getCurrentStudentBatch()+" and stu.selected=true";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Student> list = ((org.hibernate.Query) query).list();
+
+        session.close();
+        return list;
+
+    }
+
+    public List<Student> getStudentsNotSelectedForInternship()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Student as stu where stu.studentBatch="+getCurrentStudentBatch()+" and stu.selected=false";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Student> list = ((org.hibernate.Query) query).list();
+
+        session.close();
+        return list;
+
+    }
+
 	
 	
 	

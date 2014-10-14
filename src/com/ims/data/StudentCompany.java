@@ -24,11 +24,17 @@ public class StudentCompany implements Serializable{
 	@EmbeddedId
 	private StudentCompanyId pk = new StudentCompanyId();
 	private String state;
-	
-	
-	
-	
-	@Transient
+    private int batch;
+
+
+
+
+
+
+
+
+    @Transient
+
 	public Student getStudent() {
 		return getPk().getStudent();
 	}
@@ -67,5 +73,13 @@ public class StudentCompany implements Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
+
+    public int getBatch() {
+        return batch;
+    }
+
+    public void setBatch(int batch) {
+        this.batch = batch;
+    }
 
 }

@@ -28,7 +28,7 @@ public class ManageStudentLoginComp  extends CustomComponent{
 	{
 		//mainLayout.addComponent(new Label("This is about us"));
 		
-		final ComboBox selectStudentBatch= new ComboBox("Select Student Batch");
+		final ComboBox selectStudentBatch= new ComboBox("Select Current Student Batch");
 	    selectStudentBatch.addItem("2010");
 	    selectStudentBatch.addItem("2011");
 	    selectStudentBatch.addItem("2012");
@@ -39,7 +39,7 @@ public class ManageStudentLoginComp  extends CustomComponent{
 	    selectStudentBatch.addItem("2017");
 	    
 	    
-	    Button submit= new Button("Submit Studnet Batch");
+	    Button submit= new Button("Submit Current Student Batch");
 	    
 	    submit.addClickListener(new Button.ClickListener() {
 			
@@ -53,7 +53,7 @@ public class ManageStudentLoginComp  extends CustomComponent{
 				}
 				
 				Administration administration= new Administration();
-				administration.setBatch(Integer.parseInt(selectStudentBatch.getValue().toString()));
+				administration.setCurrentBatch(Integer.parseInt(selectStudentBatch.getValue().toString()));
 				administration.setAdminId(1234);
 				
 				AdminDAO adminDAO= (AdminDAO)ImsUI.context.getBean("AccessAdmin");

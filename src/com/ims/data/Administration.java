@@ -12,10 +12,12 @@ public class Administration {
 	
 	@Id 
 	private int adminId;
-	private int batch;
+	private int currentBatch;
+    private boolean allowStudnetToLog;
 
 
-	//gettsrs and setters
+
+    //gettsrs and setters
 	public int getAdminId() {
 		return adminId;
 	}
@@ -24,13 +26,20 @@ public class Administration {
 		this.adminId = adminId;
 	}
 
-	public int getBatch() {
-		return batch;
+	public int getCurrentBatch() {
+		return currentBatch;
 	}
 
-	public void setBatch(int batch) {
-		this.batch = batch;
+	public void setCurrentBatch(int batch) {
+		this.currentBatch = batch;
 	}
+    public boolean isAllowStudnetToLog() {
+        return allowStudnetToLog;
+    }
+
+    public void setAllowStudnetToLog(boolean allowStudnetToLog) {
+        this.allowStudnetToLog = allowStudnetToLog;
+    }
 	
 	
 	

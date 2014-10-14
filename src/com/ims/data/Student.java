@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @org.hibernate.annotations.Entity(selectBeforeUpdate = true)
 @Table(name="Student")
+
 public class Student {
 	
 	@Id
@@ -40,15 +41,17 @@ public class Student {
 	private String alResult1;
 	private String alResult2;
 	private String alResult3;
-	private String digreeTitle;
+    private String digreeTitle;
 	private int yearOfAdmission;
+    private int studentBatch;
 	private float gpaSemester1;
 	private float gpaSemester2;
 	private float gpaSemester3;
 	// this variable is used to get state of student selected or not to view to other companyis that student applied
 	private boolean selected;
+    private String selectedCompanyName;
 
-	
+
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.student", cascade=CascadeType.ALL)
 	private Collection<StudentAppliedCompany> studentCompany = new ArrayList<StudentAppliedCompany>();
@@ -271,11 +274,21 @@ public class Student {
 	}
 
 
-	
+    public String getSelectedCompanyName() {
+        return selectedCompanyName;
+    }
 
-	
+    public void setSelectedCompanyName(String selectedCompanyName) {
+        this.selectedCompanyName = selectedCompanyName;
+    }
 
-	
-	
+
+    public int getStudentBatch() {
+        return studentBatch;
+    }
+
+    public void setStudentBatch(int studentBatch) {
+        this.studentBatch = studentBatch;
+    }
 
 }

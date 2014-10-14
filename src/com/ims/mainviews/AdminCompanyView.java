@@ -2,6 +2,7 @@ package com.ims.mainviews;
 
 import com.ims.components.AllowedCompanyViewComp;
 import com.ims.components.CompanyProfileViewComp;
+import com.ims.components.ManageCompanyCvViewComp;
 import com.ims.components.NotAllowedCompanyViewComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -40,6 +41,17 @@ public class AdminCompanyView  extends CssLayout implements View{
 			buildNotAllowedCompnayView();
 			
 		}
+
+        else if (event.getParameters().equals("cv_allowed_companies"))
+        {
+            buildCvAllowedCompanyView();
+
+        }
+        else if (event.getParameters().equals("cv_not_allowed_companies"))
+        {
+            buildCvNotAllowedCompanyView();
+
+        }
 		
 		else
 		{
@@ -103,9 +115,41 @@ public class AdminCompanyView  extends CssLayout implements View{
     	                
     	                   });
 
+                        final Button cvAllowedCompanies = new Button("CV  allowed Companies");
+                        cvAllowedCompanies.setStyleName(BaseTheme.BUTTON_LINK);
+                        addComponent(cvAllowedCompanies);
+
+                        cvAllowedCompanies.addClickListener(new ClickListener() {
+                            @Override
+                            public void buttonClick(ClickEvent event) {
+
+                                getUI().getNavigator().navigateTo("/company/cv_allowed_companies");
+
+
+                            }
+
+
+                        });
+
+                        final Button cvNotAllowedCompanies = new Button("CV Not allowed Companies");
+                        cvNotAllowedCompanies.setStyleName(BaseTheme.BUTTON_LINK);
+                        addComponent(cvNotAllowedCompanies);
+
+                        cvNotAllowedCompanies.addClickListener(new ClickListener() {
+                            @Override
+                            public void buttonClick(ClickEvent event) {
+
+                                getUI().getNavigator().navigateTo("/company/cv_not_allowed_companies");
+
+
+                            }
+
+
+                        });
+
 
     	                
-    	                setExpandRatio(notAllowedCompanies, 1);
+    	                setExpandRatio(cvNotAllowedCompanies, 1);
     	                
 
     				}
@@ -158,4 +202,20 @@ public class AdminCompanyView  extends CssLayout implements View{
     }
 
 
+    private void buildCvAllowedCompanyView()
+
+    {
+
+        content.removeAllComponents();
+        content.addComponent(new ManageCompanyCvViewComp("CvAllowedCompany"));
+
+    }
+
+
+    private void buildCvNotAllowedCompanyView()
+    {
+        content.removeAllComponents();
+        content.addComponent(new ManageCompanyCvViewComp("CvNotAllowedCompany"));
+
+    }
 }

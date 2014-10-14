@@ -1,5 +1,6 @@
 package com.ims.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -52,14 +53,18 @@ public class StudentAppliedCompanyDAO {
 	{
 		Session session = getSessionFactory().openSession();
 		session.beginTransaction();
+
+        Company company =(Company)session.get(Company.class, compnayUserName);
+        int y= company.getStudentCompany().size();
+
 		Student student =(Student)session.get(Student.class, studentUserName);
 		// this x , y initialize becose othervise its not fetch the object from this tables
 		int x= student.getStudentCompany().size();
 		student.setSelected(true);
+        student.setSelectedCompanyName(company.getCompanyName());
 		session.update(student);
 		
-		Company company =(Company)session.get(Company.class, compnayUserName);
-		int y= company.getStudentCompany().size();
+
 		
 		session.getTransaction().commit();
 		session.close();
@@ -97,6 +102,37 @@ public class StudentAppliedCompanyDAO {
 		
 		return false;
 	}
+
+    public List<StudentAppliedCompany> getStudentAppliedCompanyList(String userName)
+    {
+
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Student student =(Student)session.get(Student.class, userName);
+        // this x , y initialize becose othervise its not fetch the object from this tables
+        int x =student.getStudentCompany().size();
+        System.out.println(x+"size of student company");
+
+/*		StudentCompany  studentCompany = new StudentCompany();
+		studentCompany.setStudent(student);
+		studentCompany.setCompany(null);
+		String SQL_QUERY = "from StudentCompany as stucom  where stucom.pk='" + studentCompany + "'";
+		Query query = session.createQuery(SQL_QUERY);
+		List<StudentCompany> list = ((org.hibernate.Query) query).list();*/
+        session.getTransaction().commit();
+        session.close();
+        List<StudentAppliedCompany> list = new ArrayList<StudentAppliedCompany>();
+        list.addAll(student.getStudentCompany());
+
+        if(list.size()==0)
+        {
+            System.out.println("mala not working");
+        }
+
+        return list;
+
+
+    }
 	
 	
 	

@@ -37,7 +37,7 @@ public class LoginDAO {
 				{
 					return "error";
 				}
-				if(usersList.get(0).getBatch()==oldAdministration.getBatch())
+				if(oldAdministration.isAllowStudnetToLog()&&usersList.get(0).getBatch()==oldAdministration.getCurrentBatch())
 				{
 					if(usersList.get(0).getPrivilage()=='A')
 					{
@@ -72,7 +72,7 @@ public class LoginDAO {
 			}
 			else 
 			{
-				String hql2 = " from Company cm where cm.companyUserName='" + userName + "'and cm.allowed='1'";
+				String hql2 = " from Company cm where cm.companyUserName='" + userName + "'and cm.allowed=true";
 				Query query2 = session.createQuery(hql2);
 				List<Company> list2 = ((org.hibernate.Query) query2).list();
 				if (list2.size() > 0) {

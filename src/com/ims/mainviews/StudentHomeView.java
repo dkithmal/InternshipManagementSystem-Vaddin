@@ -1,6 +1,7 @@
 package com.ims.mainviews;
 
 import com.ims.components.StudentCvFormComp;
+import com.ims.components.StudentCvViewComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
@@ -143,7 +144,8 @@ public class StudentHomeView  extends CssLayout implements View{
     private void buildViewProfileView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new Label("this is view profile"));
+    	//content.addComponent(new Label("this is view profile"));
+        content.addComponent(new StudentCvViewComp("sfdfdf"));
     	
     }
     

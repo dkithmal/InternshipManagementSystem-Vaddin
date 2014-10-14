@@ -3,6 +3,7 @@ package com.ims.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ims.data.Administration;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,12 +15,23 @@ import com.ims.data.StudentAppliedCompany;
 public class CompanyDAO {
 	private SessionFactory sessionFactory;
 
-	
-	
+
+
+    private int getCurrentStudentBatch()
+    {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Administration administration= (Administration)session.get(Administration.class, 1234);
+        session.close();
+        return administration.getCurrentBatch();
+
+    }
+
+
 	public List<Company> getAllowedComapnies()
 	{
 		Session session = getSessionFactory().openSession();
-		String SQL_QUERY = "from Company as com  where com.allowed='1'";
+		String SQL_QUERY = "from Company as com  where com.allowed=true";
 		Query query = session.createQuery(SQL_QUERY);
 		List<Company> list = ((org.hibernate.Query) query).list();
 		session.close();
@@ -31,7 +43,7 @@ public class CompanyDAO {
 	public List<Company> getNotAllowedCompanies()
 	{
 		Session session = getSessionFactory().openSession();
-		String SQL_QUERY = "from Company as com  where com.allowed='0'";
+		String SQL_QUERY = "from Company as com  where com.allowed=false";
 		Query query = session.createQuery(SQL_QUERY);
 		List<Company> list = ((org.hibernate.Query) query).list();
 		session.close();
@@ -66,8 +78,7 @@ public class CompanyDAO {
 			return list.get(0);
 		else 
 			return null;
-		
-		
+
 	}
 	
 	public void acceptCompany(String userName)
@@ -131,15 +142,16 @@ public class CompanyDAO {
 		{
 			for(StudentAppliedCompany studentAppliedCompany:company.getStudentCompany())
 			{
+                if((studentAppliedCompany.getStudentBatch()==getCurrentStudentBatch()))
 				list.add(studentAppliedCompany.getStudent());
-				
+
 			}
-			
+
 		}
 		else
-		{
-			list= null;
-		}
+        {
+            list= null;
+        }
 		
 
 		
@@ -161,7 +173,7 @@ public class CompanyDAO {
 		{
 			for(StudentAppliedCompany studentAppliedCompany:company.getStudentCompany())
 			{
-				if(studentAppliedCompany.getState().equals("pending"))
+				if(studentAppliedCompany.getState().equals("pending")&&(studentAppliedCompany.getStudentBatch()==getCurrentStudentBatch()))
 				list.add(studentAppliedCompany.getStudent());
 				
 			}
@@ -193,7 +205,7 @@ public class CompanyDAO {
 			for(StudentAppliedCompany studentAppliedCompany:company.getStudentCompany())
 			{
 				
-				if(studentAppliedCompany.getState().equals("interview"))
+				if(studentAppliedCompany.getState().equals("interview")&&(studentAppliedCompany.getStudentBatch()==getCurrentStudentBatch()))
 				{
 					list.add(studentAppliedCompany.getStudent());
 					
@@ -208,7 +220,6 @@ public class CompanyDAO {
 		{
 			list= null;
 		}
-		
 
 		
 		return list;
@@ -230,7 +241,7 @@ public class CompanyDAO {
 			for(StudentAppliedCompany studentAppliedCompany:company.getStudentCompany())
 			{
 				
-				if(studentAppliedCompany.getState().equals("Selected"))
+				if(studentAppliedCompany.getState().equals("Selected")&&(studentAppliedCompany.getStudentBatch()==getCurrentStudentBatch()))
 				{
 					list.add(studentAppliedCompany.getStudent());
 					
@@ -251,6 +262,64 @@ public class CompanyDAO {
 		return list;
 		
 	}
+
+
+
+    public List<Company> getCvAllowedCompanyList()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY ="from Company as com  where com.receiveCv=true and com.allowed=true";
+        Query query = session.createQuery(SQL_QUERY);
+
+        List<Company> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+        return list;
+
+    }
+
+    public List<Company> getCvNotAllowedCompanyList()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY ="from Company as com  where com.receiveCv=false and com.allowed=true and com.state=false";
+        Query query = session.createQuery(SQL_QUERY);
+
+        List<Company> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+        return list;
+
+    }
+
+
+
+
+    // this method is used to send cv's to company by admin
+    public void setAllowCvToCompany(String userName)
+    {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Company company2 = (Company)session.get(Company.class, userName);
+        company2.setReceiveCv(true);
+        session.merge(company2);
+        session.getTransaction().commit();
+        session.close();
+
+
+    }
+    // this method is used to remove cv form company by admin
+    public void setRemoveCvFromCompany(String userName)
+    {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Company company2 = (Company)session.get(Company.class, userName);
+        company2.setReceiveCv(false);
+        session.merge(company2);
+        session.getTransaction().commit();
+        session.close();
+
+
+    }
 	
 	
 	

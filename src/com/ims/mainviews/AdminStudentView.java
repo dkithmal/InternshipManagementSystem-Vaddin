@@ -1,6 +1,7 @@
 package com.ims.mainviews;
 
 import com.ims.components.AllStudentsViewComp;
+import com.ims.components.ViewStudentStateComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
@@ -175,7 +176,8 @@ public class AdminStudentView  extends CssLayout implements View{
     private void buildNotSelectedStudentsView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new Label("this is not selected student view in admin"));
+    	//.addComponent(new Label("this is not selected student view in admin"));
+        content.addComponent(new ViewStudentStateComp("notSelected"));
     	
 
     }
@@ -183,7 +185,8 @@ public class AdminStudentView  extends CssLayout implements View{
     private void buildSelectedStudentsView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new Label("this is selected students in admin"));
+    	//content.addComponent(new Label("this is selected students in admin"));
+        content.addComponent(new ViewStudentStateComp("selected"));
     	
     }
     

@@ -16,17 +16,17 @@ public class AdminDAO {
 	public void changeAdminProfile(String oldUserName,User user)
 	{
 		Session session = getSessionFactory().openSession();
-		session.beginTransaction();
-		User olduser = (User)session.get(User.class, oldUserName);
-		session.delete(olduser);
-		session.getTransaction().commit();
-		session.close();
-		
-		Session session2 = getSessionFactory().openSession();
-		session2.beginTransaction();
-		session2.save(user);
-		session2.beginTransaction().commit();
-		session2.close();
+        session.beginTransaction();
+        User olduser = (User)session.get(User.class, oldUserName);
+        session.delete(olduser);
+        session.getTransaction().commit();
+        session.close();
+
+        Session session2 = getSessionFactory().openSession();
+        session2.beginTransaction();
+        session2.save(user);
+        session2.beginTransaction().commit();
+        session2.close();
 		
 	}
 	

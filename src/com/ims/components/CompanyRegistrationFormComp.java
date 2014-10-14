@@ -159,8 +159,8 @@ public class CompanyRegistrationFormComp extends CustomComponent{
 		//layout.setSizeFull();
 		
 		FormLayout registrationForm = new FormLayout();
-		        
-		
+
+
 
 		companyName.setRequired(true);
 		image.setVisible(false);
