@@ -1,9 +1,13 @@
 package com.ims.mainviews;
 
+import com.ims.ImsUI;
+import com.ims.business.StudentAppliedCompanyDAO;
 import com.ims.components.AllStudentsViewComp;
+import com.ims.components.StudentCvViewComp;
 import com.ims.components.ViewStudentStateComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -47,6 +51,11 @@ public class AdminStudentView  extends CssLayout implements View{
 			buildStudentStatusView();
 			
 		}
+
+        else
+        {
+            buildStudentProfile(event.getParameters());
+        }
 		
 		
 	}
@@ -195,6 +204,17 @@ public class AdminStudentView  extends CssLayout implements View{
     	content.removeAllComponents();
     	content.addComponent(new Label("this is student status in admin"));
     	
+    }
+
+    private void buildStudentProfile(String studentUserName)
+    {
+
+            content.removeAllComponents();
+            content.addComponent(new StudentCvViewComp(studentUserName));
+
+
+
+
     }
 
 }

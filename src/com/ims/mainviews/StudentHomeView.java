@@ -4,6 +4,7 @@ import com.ims.components.StudentCvFormComp;
 import com.ims.components.StudentCvViewComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -145,7 +146,7 @@ public class StudentHomeView  extends CssLayout implements View{
     {
     	content.removeAllComponents();
     	//content.addComponent(new Label("this is view profile"));
-        content.addComponent(new StudentCvViewComp("sfdfdf"));
+        content.addComponent(new StudentCvViewComp(VaadinSession.getCurrent().getAttribute("UserName").toString()));
     	
     }
     

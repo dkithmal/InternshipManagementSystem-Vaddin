@@ -75,6 +75,29 @@ public class StudentDAO {
 
     }
 
+    public Student getStudentCvInfomation(String userName)
+    {
+
+
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Student student =(Student)session.get(Student.class, userName);
+        // this x , y initialize becose othervise its not fetch the object from this tables
+        if(student==null)
+        {
+            return null;
+        }
+        int x =student.getStudentOtherQulification().size();
+        int y =student.getStudentComplitedProjects().size();
+        int z= student.getStudentCompany().size();
+        session.getTransaction().commit();
+        session.close();
+
+        return student;
+
+
+    }
+
 	
 	
 	

@@ -1,11 +1,17 @@
 package com.ims.components;
 
+import com.ims.ImsUI;
+import com.ims.business.StudentDAO;
+import com.ims.data.Student;
+import com.ims.data.StudentComplitedProjects;
+import com.ims.data.StudentOtherQulification;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.VaadinService;
 import com.vaadin.ui.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Collection;
 
 /**
  * Created by Damitha on 10/13/14.
@@ -17,10 +23,22 @@ public class StudentCvViewComp extends CustomComponent {
     final Embedded image = new Embedded("");
     public File file;
     FileInputStream fis = null;
+    private Collection<StudentComplitedProjects> studentComplitedProjects;
+    private Collection<StudentOtherQulification> studentOtherQulification;
+
+    Student student;
 
     public StudentCvViewComp(String studentUserName) {
 
         setSizeFull();
+
+        StudentDAO sudentDAO=  (StudentDAO) ImsUI.context.getBean("AccessStudent");
+        student=sudentDAO.getStudentCvInfomation(studentUserName);
+
+        if (student==null)
+        {
+            return;
+        }
 
         buildStudentCvView();
         setCompositionRoot(mainLayout);
@@ -44,14 +62,14 @@ public class StudentCvViewComp extends CustomComponent {
         cvViewPanel.setHeight("100%");
 
 
-        Label studentCvMainHeader=new Label("Damitha Kithmal | Curriculum vite");
+        Label studentCvMainHeader=new Label(student.getNameInFull()+" | Curriculum Vitae");
         studentCvMainHeader.addStyleName("studentCvMainHeader");
         studentCvMainHeader.setWidthUndefined();
         cvViewLayout.addComponent(studentCvMainHeader);
         cvViewLayout.setComponentAlignment(studentCvMainHeader, Alignment.TOP_CENTER);
 
 
-        Label studentAddress= new Label("475/1 Samudra Mw, Hokandara North Hokandara.");
+        Label studentAddress= new Label(student.getPermanentAddress());
         studentAddress.addStyleName("studentCvContent");
         studentAddress.setWidthUndefined();
         cvViewLayout.addComponent(studentAddress);
@@ -61,9 +79,9 @@ public class StudentCvViewComp extends CustomComponent {
 
         HorizontalLayout studentMainInfoLayout= new HorizontalLayout();
 
-        Label studentTelNo= new Label("+94 711086804");
+        Label studentTelNo= new Label(student.getMobile1());
         studentTelNo.addStyleName("studentCvContent");
-        Label studentEmail= new Label("dkithmalfit@gmail.com");
+        Label studentEmail= new Label(student.getEmail());
         studentEmail.addStyleName("studentCvContent");
         Label studentLinkedIn= new Label("linkedin.com/in/damithakithmal");
         studentLinkedIn.addStyleName("studentCvContent");
@@ -81,8 +99,7 @@ public class StudentCvViewComp extends CustomComponent {
         objectiveLabel.addStyleName("studentCvHeader");
         objectiveLabel.setWidthUndefined();
 
-        Label studentObjective= new Label("To join a competitive and challenging IT industry and obtain an internship with the intention of contributing the growth " +
-                "of the company with my knowledge while uplifting my professional skills");
+        Label studentObjective= new Label(student.getObjectives());
         studentObjective.addStyleName("studentCvContent");
         studentObjective.setWidth("100%");
         studentObjective.setHeightUndefined();
@@ -93,8 +110,7 @@ public class StudentCvViewComp extends CustomComponent {
         profileLabel.addStyleName("studentCvHeader");
 
 
-        Label studentProfile= new Label("Energetic individual with the passion for IT who is willing to take challenges and complete assigned tasks to maximum quality possible." +
-                " A team player as well as a motivator and ready to pull everyone through in tight situations while enjoying the pressure.");
+        Label studentProfile= new Label(student.getProfile());
         studentProfile.addStyleName("studentCvContent");
         studentProfile.setWidth("100%");
         studentProfile.setHeightUndefined();
@@ -102,11 +118,11 @@ public class StudentCvViewComp extends CustomComponent {
 
         try {
 
-            file = new File(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath()+"/WEB-INF/images/damitha.png");
+            file = new File(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath()+"/WEB-INF/images/"+student.getStudentUserName()+".png");
             fis = new FileInputStream (file);
         } catch (final java.io.FileNotFoundException e) {
 
-            file = new File(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath()+"/WEB-INF/images/defalutCompany.png");
+            file = new File(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath()+"/WEB-INF/images/defalutStudent.png");
 
         }
 
@@ -135,13 +151,13 @@ public class StudentCvViewComp extends CustomComponent {
         cvViewLayout.addComponent(personalInformationLabel);
 
 
-        Label fullName=new Label("Full Name : Hewa Marambage Damitha Kithmal");
+        Label fullName=new Label("Full Name : "+student.getNameInFull());
         fullName.addStyleName("studentCvContent");
-        Label dateOfBirth = new Label("Date of Birth : 16 August 1990");
+        Label dateOfBirth = new Label("Date of Birth : "+student.getDateOfBirth());
         dateOfBirth.addStyleName("studentCvContent");
         Label nic = new Label("NIC : 902290419V");
         nic.addStyleName("studentCvContent");
-        Label gender = new Label("Gender : Male");
+        Label gender = new Label("Gender : "+student.getGender());
         gender.addStyleName("studentCvContent");
         Label nationality = new Label("Nationality : Sri Lankan");
         nationality.addStyleName("studentCvContent");
@@ -163,11 +179,11 @@ public class StudentCvViewComp extends CustomComponent {
         Label tertiaryEducation=new Label("Tertiary Education: Currently Following B.Sc. in Information Technology (Hons.)");
         tertiaryEducation.addStyleName("studentCvSubHeader");
         tertiaryEducation.setHeightUndefined();
-        Label semester1Gpa=new Label("Level 1 - Semester 1 GPA: 3.46");
+        Label semester1Gpa=new Label("Level 1 - Semester 1 GPA: "+student.getGpaSemester1());
         semester1Gpa.addStyleName("studentCvContent");
-        Label semester2Gpa=new Label("Level 1 - Semester 2 GPA: 3.35");
+        Label semester2Gpa=new Label("Level 1 - Semester 2 GPA: "+student.getGpaSemester2());
         semester2Gpa.addStyleName("studentCvContent");
-        Label semester3Gpa=new Label("Level 2 - Semester 1 GPA: 3.33");
+        Label semester3Gpa=new Label("Level 2 - Semester 1 GPA: "+student.getGpaSemester3());
         semester3Gpa.addStyleName("studentCvContent");
 
         cvViewLayout.addComponent(tertiaryEducation);
@@ -175,17 +191,17 @@ public class StudentCvViewComp extends CustomComponent {
         cvViewLayout.addComponent(semester2Gpa);
         cvViewLayout.addComponent(semester3Gpa);
 
-        Label secondaryEducation= new Label("Secondary Education: (2007-2009) Ananda College, Colombo 10.");
+        Label secondaryEducation= new Label("Secondary Education: "+student.getSchool());
         secondaryEducation.addStyleName("studentCvSubHeader");
         secondaryEducation.setHeightUndefined();
 
         Label alStream= new Label("G.C.E. (A/L) 2010 Physical Science Stream");
         alStream.addStyleName("studentCvContent");
-        Label alSubject1=new Label("Combined Maths A");
+        Label alSubject1=new Label(student.getAlSubject1()+": "+student.getAlResult1());
         alSubject1.addStyleName("studentCvContent");
-        Label alSubject2=new Label("Chemistry B");
+        Label alSubject2=new Label(student.getAlSubject2()+": "+student.getAlResult2());
         alSubject2.addStyleName("studentCvContent");
-        Label alSubject3=new Label("Physics B");
+        Label alSubject3=new Label(student.getAlSubject3()+": "+student.getAlResult3());
         alSubject3.addStyleName("studentCvContent");
         Label zScore = new Label("Z-score 1.803");
         zScore.addStyleName("studentCvContent");
@@ -206,14 +222,15 @@ public class StudentCvViewComp extends CustomComponent {
         projectsLabel.addStyleName("studentCvHeader");
         cvViewLayout.addComponent(projectsLabel);
 
-        for (int x=0;x<3;x++)
+        studentComplitedProjects=student.getStudentComplitedProjects();
+
+        for (StudentComplitedProjects project:studentComplitedProjects)
         {
-            Label projectTitel= new Label("Internship Management system developed for faculty of Information Technology (Level 2 project)");
+            Label projectTitel= new Label(project.getProjectTitle());
             projectTitel.setHeightUndefined();
             projectTitel.addStyleName("studentCvSubHeader");
 
-            Label projectDiscription = new Label("This system has replaced the manual internship management process of the faculty. " +
-                    "It is capable of making interactivity with student and company directly through the administrator.");
+            Label projectDiscription = new Label(project.getProjectDescription());
             projectDiscription.setHeightUndefined();
             projectDiscription.addStyleName("studentCvContent");
 
@@ -222,9 +239,23 @@ public class StudentCvViewComp extends CustomComponent {
             cvViewLayout.addComponent(projectDiscription);
         }
 
-        Label otherQulification= new Label("Other Qulification");
-        otherQulification.addStyleName("studentCvHeader");
-        cvViewLayout.addComponent(otherQulification);
+
+
+        studentOtherQulification=student.getStudentOtherQulification();
+
+        Label otherQulificationLabel= new Label("Other Qulification");
+        otherQulificationLabel.addStyleName("studentCvHeader");
+        cvViewLayout.addComponent(otherQulificationLabel);
+
+        for (StudentOtherQulification otherQulification:studentOtherQulification)
+        {
+            Label studentQulification= new Label(otherQulification.getDescription());
+            studentQulification.setHeightUndefined();
+            studentQulification.addStyleName("studentCvContent");
+
+            cvViewLayout.addComponent(studentQulification);
+
+        }
 
 
 

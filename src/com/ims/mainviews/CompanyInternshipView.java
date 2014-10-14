@@ -2,6 +2,7 @@ package com.ims.mainviews;
 
 import com.ims.ImsUI;
 import com.ims.business.StudentAppliedCompanyDAO;
+import com.ims.components.StudentCvViewComp;
 import com.ims.components.StudentDetailsViewComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -232,6 +233,8 @@ public class CompanyInternshipView extends CssLayout implements View{
     	final StudentAppliedCompanyDAO studentAppliedCompanyDAO=(StudentAppliedCompanyDAO)ImsUI.context.getBean("AccessStudentAppliedCompany");
     	if(studentAppliedCompanyDAO.checkStudentAppliedComapany(VaadinSession.getCurrent().getAttribute("UserName").toString(), studentUserName))
     	{
+            content.removeAllComponents();
+            content.addComponent(new StudentCvViewComp(studentUserName));
     		
     	}
     	else
