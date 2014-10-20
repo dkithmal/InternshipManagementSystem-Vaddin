@@ -22,8 +22,8 @@ public class Company {
 	private String companyTelephone;	
 	private String companyAddress;
 	private String companyWeb;
-	private String noOfVacancies;
-	private String aboutCompany;
+	private int noOfVacancies;
+    private String aboutCompany;
 	private String technologies;
 	private String companyEmail;
 	private String contactPerson;
@@ -70,6 +70,14 @@ public class Company {
 		this.allowed = allowed;
 	}
 
+    public int getNoOfVacancies() {
+        return noOfVacancies;
+    }
+
+    public void setNoOfVacancies(int noOfVacancies) {
+        this.noOfVacancies = noOfVacancies;
+    }
+
 	public String getCompanyUserName() {
 		return companyUserName;
 	}
@@ -105,12 +113,6 @@ public class Company {
 	}
 	public void setCompanyWeb(String companyWeb) {
 		this.companyWeb = companyWeb;
-	}
-	public String getNoOfVacancies() {
-		return noOfVacancies;
-	}
-	public void setNoOfVacancies(String noOfVacancies) {
-		this.noOfVacancies = noOfVacancies;
 	}
 	public String getAboutCompany() {
 		return aboutCompany;

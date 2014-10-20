@@ -20,12 +20,23 @@ public class CompanyDAO {
     private int getCurrentStudentBatch()
     {
         Session session = getSessionFactory().openSession();
-        session.beginTransaction();
-        Administration administration= (Administration)session.get(Administration.class, 1234);
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
         session.close();
-        if(administration==null)
+
+        if(list.size()>0)
+        {
+           return list.get(0).getCurrentBatch();
+
+        }
+        else
+        {
             return 0;
-        return administration.getCurrentBatch();
+
+        }
+
+
 
     }
 
@@ -347,6 +358,19 @@ public class CompanyDAO {
             return null;
 
 
+
+    }
+
+
+    public void updateNoOfVacancies(String CompanyUserName,int noOfVacansies)
+    {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Company company2 = (Company)session.get(Company.class, CompanyUserName);
+        company2.setNoOfVacancies(noOfVacansies);
+        session.merge(company2);
+        session.getTransaction().commit();
+        session.close();
 
     }
 	

@@ -4,6 +4,7 @@ import com.ims.ImsUI;
 import com.ims.business.StudentAppliedCompanyDAO;
 import com.ims.components.StudentCvViewComp;
 import com.ims.components.StudentDetailsViewComp;
+import com.ims.components.UpdateCompanyVacancyComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinSession;
@@ -223,7 +224,7 @@ public class CompanyInternshipView extends CssLayout implements View{
     private void buildUpdateVacanciesView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new Label("this is update vacany"));
+    	content.addComponent(new UpdateCompanyVacancyComp());
     	
     }
     

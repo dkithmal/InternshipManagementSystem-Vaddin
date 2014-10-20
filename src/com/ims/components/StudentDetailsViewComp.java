@@ -121,27 +121,31 @@ public class StudentDetailsViewComp extends CustomComponent{
 			Button changeStudentState=new Button(stateChangeButtonString);
 			
 			changeStudentState.setData(studentList.get(x).getStudentUserName());
+
+            if(studentList.get(x).isSelected())
+            {
+                changeStudentState.setEnabled(false);
+                changeStudentState.setCaption("Seleced By Other Company");
+
+            }
 			
 			changeStudentState.addClickListener(new Button.ClickListener() {
-		        public void buttonClick(ClickEvent event) {
-		        	
-		        	if(studentState=="NotSelectedForInterview")
-		        	{
-		        		studentAppliedCompanyDAO.updateStudentStateToInterview(VaadinSession.getCurrent().getAttribute("UserName").toString(),(String)event.getButton().getData());
-		        		getUI().getNavigator().navigateTo("/internship/not_selected_students_for_inverivew");
-		        		
-		        	}
-		        	else if(studentState=="SelectedForInterview")
-		        	{
-		        		studentAppliedCompanyDAO.updateStudentStateToSelected(VaadinSession.getCurrent().getAttribute("UserName").toString(),(String)event.getButton().getData());
-		        		getUI().getNavigator().navigateTo("/internship/selected_students_for_inverivew");
-		        		
-		        	}
-		        	
-		        	//companyDAO.unAllowedCompany((String)event.getButton().getData());
-		        	//getUI().getNavigator().navigateTo("/student/allowed_companies");
-		        } 
-		    });
+                public void buttonClick(ClickEvent event) {
+
+                    if (studentState == "NotSelectedForInterview") {
+                        studentAppliedCompanyDAO.updateStudentStateToInterview(VaadinSession.getCurrent().getAttribute("UserName").toString(), (String) event.getButton().getData());
+                        getUI().getNavigator().navigateTo("/internship/not_selected_students_for_inverivew");
+
+                    } else if (studentState == "SelectedForInterview") {
+                        studentAppliedCompanyDAO.updateStudentStateToSelected(VaadinSession.getCurrent().getAttribute("UserName").toString(), (String) event.getButton().getData());
+                        getUI().getNavigator().navigateTo("/internship/selected_students_for_inverivew");
+
+                    }
+
+                    //companyDAO.unAllowedCompany((String)event.getButton().getData());
+                    //getUI().getNavigator().navigateTo("/student/allowed_companies");
+                }
+            });
 			
 			
 			if(stateChangeButtonString.equals(""))

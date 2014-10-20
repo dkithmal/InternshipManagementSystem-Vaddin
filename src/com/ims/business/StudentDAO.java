@@ -18,10 +18,23 @@ public class StudentDAO {
     private int getCurrentStudentBatch()
     {
         Session session = getSessionFactory().openSession();
-        session.beginTransaction();
-        Administration administration= (Administration)session.get(Administration.class, 1234);
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
         session.close();
-        return administration.getCurrentBatch();
+
+        if(list.size()>0)
+        {
+            return list.get(0).getCurrentBatch();
+
+        }
+        else
+        {
+            return 0;
+
+        }
+
+
 
     }
 
