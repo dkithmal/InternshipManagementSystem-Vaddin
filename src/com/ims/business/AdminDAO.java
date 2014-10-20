@@ -85,6 +85,140 @@ public class AdminDAO {
 
 		
 	}
+
+
+    public void enableStudentLogin()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+
+
+        if(list.size()>0)
+        {
+            Administration administration= list.get(0);
+            administration.setAllowStudnetToLog(true);
+
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.update(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+        else
+        {
+
+            Administration administration= new Administration();
+            administration.setAllowStudnetToLog(true);
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.save(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+
+    }
+
+    public void disableStudentLogin()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+
+
+        if(list.size()>0)
+        {
+            Administration administration= list.get(0);
+            administration.setAllowStudnetToLog(false);
+
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.update(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+        else
+        {
+
+            Administration administration= new Administration();
+            administration.setAllowStudnetToLog(false);
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.save(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+
+    }
+
+
+    public boolean getStudentLoginState()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+        if(list.size()>0)
+        {
+
+            return list.get(0).isAllowStudnetToLog();
+
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public void setStudentApplicableCompanyCount(int count)
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+
+
+        if(list.size()>0)
+        {
+            Administration administration= list.get(0);
+            administration.setApplicableCompanyCount(count);
+
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.update(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+        else
+        {
+
+            Administration administration= new Administration();
+            administration.setApplicableCompanyCount(count);
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.save(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+
+    }
 	
 	
 	public SessionFactory getSessionFactory() {
