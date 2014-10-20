@@ -40,7 +40,7 @@ public class NotAllowedCompanyViewComp extends CustomComponent{
 		table.addContainerProperty("Comapny Name", String.class, null);
 		table.addContainerProperty("Company Email",  String.class, null);
 		table.addContainerProperty("Company Contact No",  String.class, null);
-		table.addContainerProperty("No Of Vacanies",  String.class, null);
+		table.addContainerProperty("No Of Vacanies",  Integer.class, null);
 		table.addContainerProperty("View Profile",  Button.class, null);
 		table.addContainerProperty("Accept Company",  Button.class, null);
 		table.addContainerProperty("Delete Company",  Button.class, null);

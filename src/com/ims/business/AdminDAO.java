@@ -13,6 +13,27 @@ public class AdminDAO {
 	
 	private SessionFactory sessionFactory;
 
+    private int getCurrentStudentBatch()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+        if(list.size()>0)
+        {
+            return list.get(0).getCurrentBatch();
+
+        }
+        else
+        {
+            return 0;
+
+        }
+
+    }
+
 	public void changeAdminProfile(String oldUserName,User user)
 	{
 		Session session = getSessionFactory().openSession();

@@ -14,6 +14,48 @@ public class LoginDAO {
 	
 	private SessionFactory sessionFactory;
 
+    private int getCurrentStudentBatch()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+        if(list.size()>0)
+        {
+            return list.get(0).getCurrentBatch();
+
+        }
+        else
+        {
+            return 0;
+
+        }
+
+    }
+
+    private boolean isStudentAllowToLog()
+    {
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+        if(list.size()>0)
+        {
+            return list.get(0).isAllowStudnetToLog();
+
+        }
+        else
+        {
+            return false;
+
+        }
+
+    }
+
 	
 	public String findUser(String userName,String password)
 	{
@@ -32,12 +74,13 @@ public class LoginDAO {
 			}
 			else if(usersList.get(0).getType()=='s')
 			{
-				Administration oldAdministration= (Administration)session.get(Administration.class, 1234);
-				if(oldAdministration==null)
+
+                int currentBatch=getCurrentStudentBatch();
+				if(currentBatch==0)
 				{
 					return "error";
 				}
-				if(oldAdministration.isAllowStudnetToLog()&&usersList.get(0).getBatch()==oldAdministration.getCurrentBatch())
+				if(isStudentAllowToLog()&&usersList.get(0).getBatch()==currentBatch)
 				{
 					if(usersList.get(0).getPrivilage()=='A')
 					{
