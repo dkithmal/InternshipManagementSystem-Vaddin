@@ -147,12 +147,12 @@ public class StudentDetailsViewComp extends CustomComponent{
 			if(stateChangeButtonString.equals(""))
 			{
 				
-				table.addItem(new Object[] {index,studentList.get(x).getNameInFull(),studentList.get(x).getEmail(),studentList.get(x).getMobile1(),viewProfile},index);
+				table.addItem(new Object[] {index,studentList.get(x).getNameInFull(),studentList.get(x).getEmail(),studentList.get(x).getMobile(),viewProfile},index);
 				
 			}
 			else
 			{
-				table.addItem(new Object[] {index,studentList.get(x).getNameInFull(),studentList.get(x).getEmail(),studentList.get(x).getMobile1(),viewProfile,changeStudentState},index);
+				table.addItem(new Object[] {index,studentList.get(x).getNameInFull(),studentList.get(x).getEmail(),studentList.get(x).getMobile(),viewProfile,changeStudentState},index);
 				
 			}
 			

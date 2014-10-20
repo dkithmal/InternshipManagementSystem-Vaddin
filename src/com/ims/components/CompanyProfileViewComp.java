@@ -11,16 +11,14 @@ import com.ims.business.CompanyDAO;
 import com.ims.data.Company;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.VaadinService;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Embedded;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 public class CompanyProfileViewComp extends CustomComponent{
 	
 	VerticalLayout mainLayout= new VerticalLayout();
+    Panel mainLayoutPanel= new Panel();
+
+    VerticalLayout companyProfileView= new VerticalLayout();
 	
 	String comapnyName;
 	CompanyDAO companyDAO=  (CompanyDAO)ImsUI.context.getBean("AccessCompany");
@@ -29,6 +27,8 @@ public class CompanyProfileViewComp extends CustomComponent{
 	FileInputStream fis = null;
 	
 	final Embedded image = new Embedded("");
+
+
 
 	
 	
@@ -49,7 +49,14 @@ public class CompanyProfileViewComp extends CustomComponent{
 			setComapnyFromUserName();
 		}
 		buildCompanyProfile();
-		setCompositionRoot(mainLayout);
+
+
+        mainLayoutPanel.setContent(mainLayout);
+        mainLayoutPanel.setSizeFull();
+        mainLayoutPanel.addStyleName("mainLayoutPanel");
+		setCompositionRoot(mainLayoutPanel);
+
+
 		
 	}
 	
@@ -96,63 +103,103 @@ public class CompanyProfileViewComp extends CustomComponent{
 	        }
 	        
 			image.setSource(new FileResource(file));
-			
-			HorizontalLayout imagelayout= new HorizontalLayout();
-			imagelayout.setHeight("100px");
-			imagelayout.setWidth("200px");
-			image.setSizeFull();
-			imagelayout.addComponent(image);
-			//image.setHeight("80px");
-			//image.setWidth("80px");
-			
-			Label comProfile= new Label("Company Profile");
-		    comProfile.addStyleName("comRegiLable");
-		    mainLayout.addComponent(comProfile);
-		   // mainLayout.addComponent(image);
-		    mainLayout.addComponent(imagelayout);
-		    
-		    
-		    GridLayout grid = new GridLayout(4,20);
-		    grid.addComponent(new Label("Genaral Information"),1,1);
-		    grid.addComponent(new Label("Company Name"),2,2);
-		    grid.addComponent(new Label("No of Vacancies"),2,3);
-		    grid.addComponent(new Label("Technologies"),1,4);
-		    grid.addComponent(new Label("Contact Information"),1,6);
-		    grid.addComponent(new Label("Telephone"),2,7);
-		    grid.addComponent(new Label("Email"),2,8);
-		    grid.addComponent(new Label("Web site"),2,9);
-		    grid.addComponent(new Label("Contact information Contact-persions"),1,10);
-		    grid.addComponent(new Label("Contact person name"),2,11);
-		    grid.addComponent(new Label("Contact person email"),2,12);
-		    grid.addComponent(new Label("Contact person ContactNo"),2,13);
-		    grid.addComponent(new Label("Al Contact person Name"),2,14);
-		    grid.addComponent(new Label("Al Contact person email"),2,15);
-		    grid.addComponent(new Label("Al Contact persons ContactNo"),2,16);		   
-		    
-		    grid.addComponent(new Label(company.getCompanyName()),3,2);
-		    grid.addComponent(new Label(company.getNoOfVacancies()),3,3);
-		    grid.addComponent(new Label(company.getTechnologies()),3,4);
-		    grid.addComponent(new Label(company.getCompanyTelephone()),3,7);
-		    grid.addComponent(new Label(company.getCompanyEmail()),3,8);
-		    grid.addComponent(new Label(company.getCompanyWeb()),3,9);
-		    grid.addComponent(new Label(company.getContactPerson()),3,11);
-		    grid.addComponent(new Label(company.getContactPersonEmail()),3,12);
-		    grid.addComponent(new Label(company.getContactPersonTelNo()),3,13);
-		    grid.addComponent(new Label(company.getAlContactPerson()),3,14);
-		    grid.addComponent(new Label(company.getAlContactPersonEmail()),3,15);
-		    grid.addComponent(new Label(company.getAlContactPersonTelNo()),3,16);
 
-	/*		mainLayout.addComponent(new Label(company.getCompanyName()));
-			mainLayout.addComponent(new Label(company.getAboutCompany()));
-			mainLayout.addComponent(new Label(company.getCompanyEmail()));
-			mainLayout.addComponent(new Label(company.getCompanyTelephone()));
-			mainLayout.addComponent(new Label(company.getCompanyWeb()));
-			mainLayout.addComponent(new Label(company.getCompanyTelephone()));
-			*/
-		   // grid.setSizeFull();
-		    grid.addStyleName("comapnyProfileViewGrid");
-		    mainLayout.addComponent(grid);
-		    mainLayout.setExpandRatio(grid, 1);
+            image.setHeight("75px");
+            image.setWidthUndefined();
+
+
+            companyProfileView.setSizeFull();
+            companyProfileView.setSpacing(true);
+
+
+            Label companyProfileMainHeader= new Label(company.getCompanyName()+" Profile");
+            companyProfileMainHeader.setWidthUndefined();
+            companyProfileMainHeader.addStyleName("companyProfileViewMainHeader");
+            companyProfileView.addComponent(companyProfileMainHeader);
+            companyProfileView.setComponentAlignment(companyProfileMainHeader,Alignment.TOP_CENTER);
+
+            companyProfileView.addComponent(image);
+
+            Label genaralInformationLabel= new Label("Genaral Information");
+            genaralInformationLabel.addStyleName("companyProfileViewHeader");
+            companyProfileView.addComponent(genaralInformationLabel);
+
+
+            Label companyName= new Label("Company Name : "+company.getCompanyName());
+            companyName.addStyleName("companyProfileViewContent");
+            Label noOfVacancies= new Label("No of Vacancies  : "+company.getNoOfVacancies());
+            noOfVacancies.addStyleName("companyProfileViewContent");
+
+            companyProfileView.addComponent(companyName);
+            companyProfileView.addComponent(noOfVacancies);
+
+
+
+            Label technologiesLabel= new Label("Technologies");
+            technologiesLabel.addStyleName("companyProfileViewHeader");
+
+            companyProfileView.addComponent(technologiesLabel);
+
+
+            Label companyTechnologies= new Label("C++ java Web"+company.getTechnologies());
+            companyTechnologies.setHeightUndefined();
+            companyTechnologies.addStyleName("companyProfileViewContent");
+
+            companyProfileView.addComponent(companyTechnologies);
+
+
+            Label contactInformationLabel= new Label("Contact Informatin");
+            contactInformationLabel.addStyleName("companyProfileViewHeader");
+
+            companyProfileView.addComponent(contactInformationLabel);
+
+            Label companyTelephone= new Label("Company Telephone : "+company.getCompanyTelephone());
+            companyTelephone.addStyleName("companyProfileViewContent");
+            Label companyEmail= new Label("Company Email : "+company.getCompanyEmail());
+            companyEmail.addStyleName("companyProfileViewContent");
+            Label companyWeb= new Label("Company WebSite : "+company.getCompanyWeb());
+            companyWeb.addStyleName("companyProfileViewContent");
+
+            companyProfileView.addComponent(companyTelephone);
+            companyProfileView.addComponent(companyEmail);
+            companyProfileView.addComponent(companyWeb);
+
+            Label contactPersonInformationLabel= new Label("Contact Information Contact Persons");
+            contactPersonInformationLabel.addStyleName("companyProfileViewHeader");
+
+            companyProfileView.addComponent(contactPersonInformationLabel);
+
+
+
+            Label contactPersonName= new Label("Contact Person Name :"+company.getContactPerson());
+            contactPersonName.addStyleName("companyProfileViewContent");
+            Label contactPersonEmail= new Label("Contact Person Email :"+company.getContactPersonEmail());
+            contactPersonEmail.addStyleName("companyProfileViewContent");
+            Label contactPersonContactNo= new Label("Contact Person Contact No :"+company.getContactPersonTelNo());
+            contactPersonContactNo.addStyleName("companyProfileViewContent");
+            Label alternativeContactPersonName= new Label("Alternative Contact Person Name :"+company.getAlContactPerson());
+            alternativeContactPersonName.addStyleName("companyProfileViewContent");
+            Label alternativeContactPersonEmail= new Label("AlternativeContact Person Email :"+company.getAlContactPersonEmail());
+            alternativeContactPersonEmail.addStyleName("companyProfileViewContent");
+            Label alternativeContactPersonContactNo= new Label("Alternative Contact Person ContactNo :"+company.getAlContactPersonTelNo());
+            alternativeContactPersonContactNo.addStyleName("companyProfileViewContent");
+
+
+            companyProfileView.addComponent(contactPersonName);
+            companyProfileView.addComponent(contactPersonEmail);
+            companyProfileView.addComponent(contactPersonContactNo);
+            companyProfileView.addComponent(alternativeContactPersonName);
+            companyProfileView.addComponent(alternativeContactPersonEmail);
+            companyProfileView.addComponent(alternativeContactPersonContactNo);
+
+            companyProfileView.setExpandRatio(alternativeContactPersonContactNo,1);
+
+            mainLayout.addComponent(companyProfileView);
+
+
+
+
+
 		}
 		
 		

@@ -26,8 +26,7 @@ public class StudentComplitedProjects {
 	 @Column(name="projectYear")
 	 private String projectYear;
 
-	@ManyToOne
-	@NotFound(action=NotFoundAction.IGNORE)
+	@ManyToOne()
 	@JoinColumn(name="studentUserName")
 	private Student student;
 	

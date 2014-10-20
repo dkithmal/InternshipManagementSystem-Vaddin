@@ -30,9 +30,7 @@ public class Student {
 	private String dateOfBirth;
 	private String maritalStatus;
 	private String permanentAddress;
-	private String mobile1;
-	private String mobile2;
-	private String telephone;
+	private String mobile;
 	private String email;
 	private String school;
 	private String alSubject1;
@@ -57,22 +55,22 @@ public class Student {
 	private Collection<StudentAppliedCompany> studentCompany = new ArrayList<StudentAppliedCompany>();
 	
 
-	@OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
+	@OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
 	private  Collection<StudentComplitedProjects> studentComplitedProjects = new ArrayList<StudentComplitedProjects>();
-	
-	@OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
+
+	@OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
 	private Collection<StudentOtherQulification> studentOtherQulification = new ArrayList<StudentOtherQulification>();
 	
-	@OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
+	@OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Collection<StudentProfessionalExp> studentProfessionalExp = new ArrayList<StudentProfessionalExp>();
-	
+
 /*	@OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
 	private  Collection<Support> support  = new ArrayList<Support>();*/
-	
-	
-	
-	
-	
+
+
+
+
+
 	//getters and setters
 	public boolean isSelected() {
 		return selected;
@@ -158,25 +156,13 @@ public class Student {
 	public void setPermanentAddress(String permanentAddress) {
 		this.permanentAddress = permanentAddress;
 	}
-	public String getMobile1() {
-		return mobile1;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setMobile1(String mobile1) {
-		this.mobile1 = mobile1;
+	public void setMobile(String mobile1) {
+		this.mobile = mobile1;
 	}
-	public String getMobile2() {
-		return mobile2;
-	}
-	public void setMobile2(String mobile2) {
-		this.mobile2 = mobile2;
-	}
-	
-	public String getTelephone() {
-		return telephone;
-	}
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+
 	public String getEmail() {
 		return email;
 	}

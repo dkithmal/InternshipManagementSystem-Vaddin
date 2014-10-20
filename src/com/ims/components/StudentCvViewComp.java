@@ -79,7 +79,7 @@ public class StudentCvViewComp extends CustomComponent {
 
         HorizontalLayout studentMainInfoLayout= new HorizontalLayout();
 
-        Label studentTelNo= new Label(student.getMobile1());
+        Label studentTelNo= new Label(student.getMobile());
         studentTelNo.addStyleName("studentCvContent");
         Label studentEmail= new Label(student.getEmail());
         studentEmail.addStyleName("studentCvContent");
@@ -128,7 +128,7 @@ public class StudentCvViewComp extends CustomComponent {
 
         image.setSource(new FileResource(file));
         image.setHeight("200px");
-        image.setWidth("200px");
+        image.setWidthUndefined();
 
 
         GridLayout profileGrid= new GridLayout(2,4);

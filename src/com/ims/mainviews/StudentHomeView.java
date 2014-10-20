@@ -1,5 +1,6 @@
 package com.ims.mainviews;
 
+import com.ims.components.StudentCompanySelectViewComp;
 import com.ims.components.StudentCvFormComp;
 import com.ims.components.StudentCvViewComp;
 import com.vaadin.navigator.View;
@@ -43,6 +44,12 @@ public class StudentHomeView  extends CssLayout implements View{
 			buildAppliedCompanyView();
 			
 		}
+
+        else if (event.getParameters().equals("apply_company"))
+        {
+            buildApplycompanyView();
+
+        }
 		
 	}
 	
@@ -95,23 +102,39 @@ public class StudentHomeView  extends CssLayout implements View{
 
     	                
     	                
-    	                final Button appliedCompanies = new Button("Applied Companies"); 
-    	                appliedCompanies.setStyleName(BaseTheme.BUTTON_LINK);
-    	                addComponent(appliedCompanies);
-    	                
-    	                appliedCompanies.addClickListener(new ClickListener() {
-    	                    @Override
-    	                    public void buttonClick(ClickEvent event) {
-    	                    	
-    	                    	
-    	                    	getUI().getNavigator().navigateTo("/home/applied_companies");
+    	                final Button appliedCompanies = new Button("Applied Companies");
+                        appliedCompanies.setStyleName(BaseTheme.BUTTON_LINK);
+                        addComponent(appliedCompanies);
 
-    	                    }
-    	                    
+                        appliedCompanies.addClickListener(new ClickListener() {
+                            @Override
+                            public void buttonClick(ClickEvent event) {
+
+
+                                getUI().getNavigator().navigateTo("/home/applied_companies");
+
+                            }
+
+
+                        });
+
+                        final Button applycompany = new Button("Apply Companyies");
+                        applycompany.setStyleName(BaseTheme.BUTTON_LINK);
+                        addComponent(applycompany);
+
+                        applycompany.addClickListener(new ClickListener() {
+                            @Override
+                            public void buttonClick(ClickEvent event) {
+
+
+                                getUI().getNavigator().navigateTo("/home/apply_company");
+
+                            }
+
+
+                        });
     	                
-    	                   });
-    	                
-    	                setExpandRatio(appliedCompanies, 1);
+    	                setExpandRatio(applycompany, 1);
     	                
 
     				}
@@ -153,7 +176,7 @@ public class StudentHomeView  extends CssLayout implements View{
     private void buildComposeCVView()
     {
     	content.removeAllComponents();    	
-    	content.addComponent(new StudentCvFormComp());
+    	content.addComponent(new StudentCvFormComp(true));
 
     }
     
@@ -162,6 +185,14 @@ public class StudentHomeView  extends CssLayout implements View{
     	content.removeAllComponents();
     	content.addComponent(new Label("this is applied companies view"));
     	
+    }
+
+
+    private void buildApplycompanyView()
+    {
+        content.removeAllComponents();
+        content.addComponent(new StudentCompanySelectViewComp());
+
     }
 
 }

@@ -23,6 +23,8 @@ public class CompanyDAO {
         session.beginTransaction();
         Administration administration= (Administration)session.get(Administration.class, 1234);
         session.close();
+        if(administration==null)
+            return 0;
         return administration.getCurrentBatch();
 
     }
@@ -317,6 +319,33 @@ public class CompanyDAO {
         session.merge(company2);
         session.getTransaction().commit();
         session.close();
+
+
+    }
+
+    public List<String> getAllAllowedCompanyNames()
+    {
+        List<String> companyNameList= new ArrayList<String>();
+
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Company as com  where com.allowed=true";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Company> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+        if(list!=null)
+        {
+            for(int x=0;x<list.size();x++)
+            {
+                companyNameList.add(list.get(x).getCompanyName());
+            }
+
+            return companyNameList;
+
+        }
+        else
+            return null;
+
 
 
     }

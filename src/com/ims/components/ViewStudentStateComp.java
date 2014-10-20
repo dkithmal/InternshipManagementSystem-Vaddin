@@ -1,7 +1,6 @@
 package com.ims.components;
 
 import com.ims.ImsUI;
-import com.ims.business.CompanyDAO;
 import com.ims.business.StudentDAO;
 import com.ims.data.Student;
 import com.vaadin.ui.AbsoluteLayout;
@@ -78,13 +77,13 @@ public class ViewStudentStateComp extends CustomComponent {
             if(studentsType.equals("selected"))
             {
 
-                table.addItem(new Object[] {index,studentList.get(x).getStudentUserName(),studentList.get(x).getNameInFull(),studentList.get(x).getMobile1(),studentList.get(x).getEmail(),studentList.get(x).getSelectedCompanyName()},index);
+                table.addItem(new Object[] {index,studentList.get(x).getStudentUserName(),studentList.get(x).getNameInFull(),studentList.get(x).getMobile(),studentList.get(x).getEmail(),studentList.get(x).getSelectedCompanyName()},index);
 
             }
 
             else
             {
-                table.addItem(new Object[] {index,studentList.get(x).getStudentUserName(),studentList.get(x).getNameInFull(),studentList.get(x).getMobile1(),studentList.get(x).getEmail()},index);
+                table.addItem(new Object[] {index,studentList.get(x).getStudentUserName(),studentList.get(x).getNameInFull(),studentList.get(x).getMobile(),studentList.get(x).getEmail()},index);
 
 
             }

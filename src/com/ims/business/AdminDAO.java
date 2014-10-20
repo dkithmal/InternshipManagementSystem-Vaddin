@@ -47,30 +47,42 @@ public class AdminDAO {
 	}
 	
 	
-	public void updateAdministrationTable(Administration administration)
+	public void updateCurrentStudentBatch(int newStudentCurrentBatch)
 	{
-		Session session = getSessionFactory().openSession();
-		session.beginTransaction();
-		Administration oldAdministration= (Administration)session.get(Administration.class, 1234);
-		
-		if(oldAdministration==null)
-		{
-			session.close();
-			Session session2 = getSessionFactory().openSession();
-			session2.beginTransaction();
-			session2.save(administration);
-			session2.beginTransaction().commit();
-			session2.close();
-			
-		}
-		else
-		{
-			session.delete(oldAdministration);
-			session.save(administration);
-			session.beginTransaction().commit();
-			session.close();
-			
-		}
+
+        Session session = getSessionFactory().openSession();
+        String SQL_QUERY = "from Administration ";
+        Query query = session.createQuery(SQL_QUERY);
+        List<Administration> list = ((org.hibernate.Query) query).list();
+        session.close();
+
+
+
+        if(list.size()>0)
+        {
+            Administration administration= list.get(0);
+            administration.setCurrentBatch(newStudentCurrentBatch);
+
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.update(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+        else
+        {
+
+            Administration administration= new Administration();
+            administration.setCurrentBatch(newStudentCurrentBatch);
+            Session session2 = getSessionFactory().openSession();
+            session2.beginTransaction();
+            session2.save(administration);
+            session2.beginTransaction().commit();
+            session2.close();
+
+        }
+
 		
 	}
 	

@@ -6,7 +6,10 @@ import java.io.OutputStream;
 
 import com.ims.ImsUI;
 import com.ims.business.RegisterStudentDAO;
+import com.ims.business.StudentDAO;
 import com.ims.data.Student;
+import com.ims.data.StudentComplitedProjects;
+import com.ims.data.StudentOtherQulification;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
@@ -43,6 +46,9 @@ public class StudentCvFormComp extends CustomComponent {
 	boolean profilePicterSelected=false;
 	
 	RegisterStudentDAO registerStudentDAO;
+    StudentDAO studentDAO;
+    Student student;
+    boolean updateStudent;
 	
 	int projectCount=1;
 	int extraCurricularActivityCount=1;
@@ -53,7 +59,7 @@ public class StudentCvFormComp extends CustomComponent {
 	@PropertyId("nameWithInitials")
 	final TextField nameWithInitials = new TextField("Name Wish Initials","");
 	@PropertyId("objectives")
-	final TextArea objectives= new TextArea("Objective");
+	final TextArea objective= new TextArea("Objective");
 	@PropertyId("profile")
 	final TextArea profile= new TextArea("Profile");
 	@PropertyId("dateOfBirth")
@@ -64,7 +70,7 @@ public class StudentCvFormComp extends CustomComponent {
 	final ComboBox maritalStatus = new ComboBox("Marital Status");	
 	@PropertyId("permanentAddress")
 	final TextField address = new TextField("Address");	
-	@PropertyId("mobile1")
+	@PropertyId("mobile")
 	final TextField contactNo = new TextField("Contact No");	
 	@PropertyId("email")
 	final TextField emailAddress = new TextField("Email Address");
@@ -135,14 +141,28 @@ public class StudentCvFormComp extends CustomComponent {
 	final TextField exterCurricularActivityTital5= new TextField("Extra Curriculaer activities tital 5");	
 	final TextArea extraCurricularActivityDiscption5 = new TextArea("Extra curriculaer activity discription 5");
 
-	
-	public StudentCvFormComp()
+
+
+    public StudentCvFormComp(boolean updateStudent)
 	{
 		setSizeFull();
 		registerStudentDAO=(RegisterStudentDAO)ImsUI.context.getBean("RegisterStudent");
-		
-		Student studnet= new Student();
-		binder.setItemDataSource(studnet);
+        studentDAO = (StudentDAO)ImsUI.context.getBean("AccessStudent");
+
+        this.updateStudent=updateStudent;
+
+        if(updateStudent)
+        {
+            student=studentDAO.getStudent(VaadinSession.getCurrent().getAttribute("UserName").toString());
+
+        }
+        else
+        {
+            student= new Student();
+
+        }
+
+		binder.setItemDataSource(student);
 		
 		
 		buildStudentCVForm();
@@ -188,12 +208,12 @@ public class StudentCvFormComp extends CustomComponent {
 		digree.addItem("BSc(Hons)Information Technology & Management");
 		
 		
-		batch.addItem("2010");
-		batch.addItem("2011");
-		batch.addItem("2012");
-		batch.addItem("2013");
-		batch.addItem("2014");
-		batch.addItem("2015");
+		batch.addItem(2010);
+		batch.addItem(2011);
+		batch.addItem(2012);
+		batch.addItem(2013);
+		batch.addItem(2014);
+		batch.addItem(2015);
 
 		alresult1.addItem("A");
 		alresult1.addItem("B");
@@ -257,6 +277,9 @@ public class StudentCvFormComp extends CustomComponent {
 		registrationForm.setComponentAlignment(personalInfoLayout, Alignment.TOP_LEFT);
 		registrationForm.addComponent(nameInFull);
 		registrationForm.addComponent(nameWithInitials);
+
+        registrationForm.addComponent(objective);
+        registrationForm.addComponent(profile);
 		
 		final Upload upload = new Upload("Profile picture", receiver);
 		upload.setButtonCaption(null);
@@ -634,45 +657,123 @@ public class StudentCvFormComp extends CustomComponent {
 		registrationForm.addComponent(exterCurricularActivityTital1);
 		registrationForm.addComponent(extraCurricularActivityDiscption1);
 
-		
-		
-		
-		
+        if(updateStudent)
+        {
+            StudentComplitedProjects project;
+            StudentOtherQulification otherQulification;
+
+            if(student.getStudentComplitedProjects().size()!=0)
+            projectCount=student.getStudentComplitedProjects().size();
+            if(student.getStudentOtherQulification().size()!=0)
+            extraCurricularActivityCount=student.getStudentOtherQulification().size();
+            switch (student.getStudentComplitedProjects().size())
+            {
+                case 10:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle10.setValue(project.getProjectTitle());
+                    projectDescription10.setValue(project.getProjectDescription());
+                    projectTitle10.setVisible(true);
+                    projectDescription10.setVisible(true);
+                case 9:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle9.setValue(project.getProjectTitle());
+                    projectDescription9.setValue(project.getProjectDescription());
+                    projectTitle9.setVisible(true);
+                    projectDescription9.setVisible(true);
+                case 8:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle8.setValue(project.getProjectTitle());
+                    projectDescription8.setValue(project.getProjectDescription());
+                    projectTitle8.setVisible(true);
+                    projectDescription8.setVisible(true);
+                case 7:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle7.setValue(project.getProjectTitle());
+                    projectDescription7.setValue(project.getProjectDescription());
+                    projectTitle7.setVisible(true);
+                    projectDescription7.setVisible(true);
+                case 6:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle6.setValue(project.getProjectTitle());
+                    projectDescription6.setValue(project.getProjectDescription());
+                    projectTitle6.setVisible(true);
+                    projectDescription6.setVisible(true);
+                case 5:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle5.setValue(project.getProjectTitle());
+                    projectDescription5.setValue(project.getProjectDescription());
+                    projectTitle5.setVisible(true);
+                    projectDescription5.setVisible(true);
+                case 4:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle4.setValue(project.getProjectTitle());
+                    projectDescription4.setValue(project.getProjectDescription());
+                    projectTitle4.setVisible(true);
+                    projectDescription4.setVisible(true);
+                case 3:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle3.setValue(project.getProjectTitle());
+                    projectDescription3.setValue(project.getProjectDescription());
+                    projectTitle3.setVisible(true);
+                    projectDescription3.setVisible(true);
+                case 2:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle2.setValue(project.getProjectTitle());
+                    projectDescription2.setValue(project.getProjectDescription());
+                    projectTitle2.setVisible(true);
+                    projectDescription2.setVisible(true);
+                case 1:
+                    project=student.getStudentComplitedProjects().iterator().next();
+                    projectTitle1.setValue(project.getProjectTitle());
+                    projectDescription1.setValue(project.getProjectDescription());
+                    projectTitle1.setVisible(true);
+                    projectDescription1.setVisible(true);
+
+            }
+
+            switch (student.getStudentOtherQulification().size())
+            {
+                case 5:
+                    otherQulification=student.getStudentOtherQulification().iterator().next();
+                    exterCurricularActivityTital5.setValue(otherQulification.getDescription());
+                    exterCurricularActivityTital5.setVisible(true);
+                case 4:
+                    otherQulification=student.getStudentOtherQulification().iterator().next();
+                    exterCurricularActivityTital4.setValue(otherQulification.getDescription());
+                    exterCurricularActivityTital4.setVisible(true);
+                case 3:
+                    otherQulification=student.getStudentOtherQulification().iterator().next();
+                    exterCurricularActivityTital3.setValue(otherQulification.getDescription());
+                    exterCurricularActivityTital3.setVisible(true);
+                case 2:
+                    otherQulification=student.getStudentOtherQulification().iterator().next();
+                    exterCurricularActivityTital2.setValue(otherQulification.getDescription());
+                    exterCurricularActivityTital2.setVisible(true);
+                case 1:
+                    otherQulification=student.getStudentOtherQulification().iterator().next();
+                    exterCurricularActivityTital1.setValue(otherQulification.getDescription());
+                    exterCurricularActivityTital1.setVisible(true);
+            }
+        }
 
 
-		
-/*		registrationForm.addComponent(nameInFull);
-		registrationForm.addComponent(nameWithInitials);
-		registrationForm.addComponent(gender);
-		registrationForm.addComponent(maritalStatus);
-		registrationForm.addComponent(dateofBirth);
-		registrationForm.addComponent(address);
-		registrationForm.addComponent(contactNo);
-		registrationForm.addComponent(emailAddress);
-		registrationForm.addComponent(skillsAndExperties);
-		//registrationForm.addComponent(experienceTitle1);
-		//registrationForm.addComponent(experienceDescription1);
-		registrationForm.addComponent(projectTitle1);
-		registrationForm.addComponent(projectDescription1);
-		registrationForm.addComponent(digree);
-		registrationForm.addComponent(batch);
-		registrationForm.addComponent(semester1Gpa);
-		registrationForm.addComponent(semester2Gpa);
-		registrationForm.addComponent(semester3Gpa);
-		registrationForm.addComponent(school);
-		registrationForm.addComponent(alResultSubject2);
-		registrationForm.addComponent(alresult1);
-		registrationForm.addComponent(exterCurricularActivityTital1);
-		registrationForm.addComponent(extraCurricularActivityDiscption1);
-		
-		registrationForm.setSizeUndefined();
-		registrationForm.setMargin(true);*/
-		
-		
-       // final FieldGroup binder = new FieldGroup(item);
-       // binder.bindMemberFields(this);
-		
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		        
 		registrationForm.addComponent(new Button("Commit",
 		    new Button.ClickListener() {
@@ -680,32 +781,171 @@ public class StudentCvFormComp extends CustomComponent {
 		    public void buttonClick(ClickEvent event) {
 	   
 		        try {
-		        	
-		        	binder.commit();
-		        	Student newStudent= new Student();
-		        	newStudent= binder.getItemDataSource().getBean();
-		        	newStudent.setStudentUserName(VaadinSession.getCurrent().getAttribute("UserName").toString());
-		        	
-		        	registerStudentDAO.registerNewStudent(newStudent);
-		        	
-		        	
-		        	
-		        	
-		        	
-		        	
-		        	
-		        	if(profilePicterSelected)
-		        	{
-		        		Notification.show("Thank You For Register In System");
-		        		upload.submitUpload();
-		        		
 
-		        	}
-		        	else
-		        	{
-		        		Notification.show("Thank You For Register In System");
-		        		getUI().getNavigator().navigateTo("/home");
-		        	}
+		        	binder.commit();
+		        	Student newStudent= binder.getItemDataSource().getBean();
+		        	newStudent.setStudentUserName(VaadinSession.getCurrent().getAttribute("UserName").toString());
+                    newStudent.getStudentComplitedProjects().removeAll(newStudent.getStudentComplitedProjects());
+                    newStudent.getStudentOtherQulification().removeAll(newStudent.getStudentOtherQulification());
+
+
+                    System.out.println("project cont existing"+ newStudent.getStudentComplitedProjects().size()+  newStudent.getStudentOtherQulification().size());
+
+		        	System.out.println("project coutnt and extra coutnt"+projectCount+extraCurricularActivityCount);
+
+
+                    switch (projectCount)
+                    {
+                        case 10:
+                            StudentComplitedProjects studentComplitedProjects10=new StudentComplitedProjects();
+                            studentComplitedProjects10.setProjectTitle(projectTitle10.getValue());
+                            studentComplitedProjects10.setProjectDescription(projectDescription10.getValue());
+                            studentComplitedProjects10.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects10);
+
+                        case 9:
+                            StudentComplitedProjects studentComplitedProjects9=new StudentComplitedProjects();
+                            studentComplitedProjects9.setProjectTitle(projectTitle9.getValue());
+                            studentComplitedProjects9.setProjectDescription(projectDescription9.getValue());
+                            studentComplitedProjects9.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects9);
+                        case 8:
+                            StudentComplitedProjects studentComplitedProjects8=new StudentComplitedProjects();
+                            studentComplitedProjects8.setProjectTitle(projectTitle8.getValue());
+                            studentComplitedProjects8.setProjectDescription(projectDescription8.getValue());
+                            studentComplitedProjects8.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects8);
+                        case 7:
+                            StudentComplitedProjects studentComplitedProjects7=new StudentComplitedProjects();
+                            studentComplitedProjects7.setProjectTitle(projectTitle7.getValue());
+                            studentComplitedProjects7.setProjectDescription(projectDescription7.getValue());
+                            studentComplitedProjects7.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects7);
+                        case 6:
+                            StudentComplitedProjects studentComplitedProjects6=new StudentComplitedProjects();
+                            studentComplitedProjects6.setProjectTitle(projectTitle6.getValue());
+                            studentComplitedProjects6.setProjectDescription(projectDescription6.getValue());
+                            studentComplitedProjects6.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects6);
+                        case 5:
+                            StudentComplitedProjects studentComplitedProjects5=new StudentComplitedProjects();
+                            studentComplitedProjects5.setProjectTitle(projectTitle5.getValue());
+                            studentComplitedProjects5.setProjectDescription(projectDescription5.getValue());
+                            studentComplitedProjects5.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects5);
+                        case 4:
+                            StudentComplitedProjects studentComplitedProjects4=new StudentComplitedProjects();
+                            studentComplitedProjects4.setProjectTitle(projectTitle4.getValue());
+                            studentComplitedProjects4.setProjectDescription(projectDescription4.getValue());
+                            studentComplitedProjects4.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects4);
+                        case 3:
+                            StudentComplitedProjects studentComplitedProjects3=new StudentComplitedProjects();
+                            studentComplitedProjects3.setProjectTitle(projectTitle3.getValue());
+                            studentComplitedProjects3.setProjectDescription(projectDescription3.getValue());
+                            studentComplitedProjects3.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects3);
+                        case 2:
+                            StudentComplitedProjects studentComplitedProjects2=new StudentComplitedProjects();
+                            studentComplitedProjects2.setProjectTitle(projectTitle2.getValue());
+                            studentComplitedProjects2.setProjectDescription(projectDescription2.getValue());
+                            studentComplitedProjects2.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects2);
+                        case 1:
+                            StudentComplitedProjects studentComplitedProjects1=new StudentComplitedProjects();
+                            studentComplitedProjects1.setProjectTitle(projectTitle1.getValue());
+                            studentComplitedProjects1.setProjectDescription(projectDescription1.getValue());
+                            studentComplitedProjects1.setStudent(newStudent);
+                            newStudent.getStudentComplitedProjects().add(studentComplitedProjects1);
+
+                        default:
+                            break;
+
+
+
+
+                    }
+
+
+
+                    switch (extraCurricularActivityCount)
+                    {
+                        case 5:
+                            StudentOtherQulification studentOtherQulification5 = new StudentOtherQulification();
+                            studentOtherQulification5.setDescription(extraCurricularActivityDiscption5.getValue());
+                            studentOtherQulification5.setStudent(newStudent);
+                            newStudent.getStudentOtherQulification().add(studentOtherQulification5);
+                        case 4:
+                            StudentOtherQulification studentOtherQulification4 = new StudentOtherQulification();
+                            studentOtherQulification4.setDescription(extraCurricularActivityDiscption4.getValue());
+                            studentOtherQulification4.setStudent(newStudent);
+                            newStudent.getStudentOtherQulification().add(studentOtherQulification4);
+                        case 3:
+                            StudentOtherQulification studentOtherQulification3 = new StudentOtherQulification();
+                            studentOtherQulification3.setDescription(extraCurricularActivityDiscption3.getValue());
+                            studentOtherQulification3.setStudent(newStudent);
+                            newStudent.getStudentOtherQulification().add(studentOtherQulification3);
+                        case 2:
+                            StudentOtherQulification studentOtherQulification2 = new StudentOtherQulification();
+                            studentOtherQulification2.setDescription(extraCurricularActivityDiscption2.getValue());
+                            studentOtherQulification2.setStudent(newStudent);
+                            newStudent.getStudentOtherQulification().add(studentOtherQulification2);
+                        case 1:
+                            StudentOtherQulification studentOtherQulification1 = new StudentOtherQulification();
+                            studentOtherQulification1.setDescription(extraCurricularActivityDiscption1.getValue());
+                            studentOtherQulification1.setStudent(newStudent);
+                            newStudent.getStudentOtherQulification().add(studentOtherQulification1);
+
+                        default:
+                            break;
+
+
+                    }
+
+
+                    if(updateStudent)
+                    {
+                        studentDAO.updateStudent(newStudent);
+
+                        if(profilePicterSelected)
+                        {
+                            Notification.show("Updated Your Profile ");
+                            upload.submitUpload();
+
+
+                        }
+                        else
+                        {
+                            Notification.show("Updated Your Profile");
+                            getUI().getNavigator().navigateTo("/home");
+                        }
+
+
+                    }
+                    else
+                    {
+                        registerStudentDAO.registerNewStudent(newStudent);
+                        //System.out.println("Student data "+newStudent.getGender()+newStudent.getMaritalStatus()+newStudent.getDigreeTitle());
+
+
+
+
+                        if(profilePicterSelected)
+                        {
+                            Notification.show("Your Cv Created");
+                            upload.submitUpload();
+
+
+                        }
+                        else
+                        {
+                            Notification.show("Your Cv Created");
+                            getUI().getNavigator().navigateTo("/home");
+                        }
+
+                    }
+
+
 
 
 
@@ -795,7 +1035,29 @@ public class StudentCvFormComp extends CustomComponent {
 	       // image.setVisible(true);
 	       // image.setSource(new FileResource(file));
 	    }
-	};	
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //getters and setters
+    public Student getStudnet() {
+        return student;
+    }
+
+    public void setStudnet(Student studnet) {
+        this.student = studnet;
+    }
+
 
 
 }

@@ -2,7 +2,7 @@ package com.ims.mainviews;
 
 import com.ims.components.ChangeAdminProfileComp;
 import com.ims.components.CreateStudentProfileViewComp;
-import com.ims.components.ManageStudentLoginComp;
+import com.ims.components.ManageStudentViewComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
@@ -36,7 +36,7 @@ public class AdminAdministrationView extends CssLayout implements View{
 			buildRemoveStudentFormSysetmView();
 			
 		}
-		else if (event.getParameters().equals("manage_student_login"))
+		else if (event.getParameters().equals("manage_student"))
 		{
 			buildManageStudentLoginView();
 			
@@ -108,7 +108,7 @@ public class AdminAdministrationView extends CssLayout implements View{
     	                    public void buttonClick(ClickEvent event) {
     	                    	
     	                    	
-    	                    	getUI().getNavigator().navigateTo("/administration/manage_student_login");
+    	                    	getUI().getNavigator().navigateTo("/administration/manage_student");
 
     	                    }
     	                    
@@ -181,7 +181,7 @@ public class AdminAdministrationView extends CssLayout implements View{
     private void buildManageStudentLoginView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new ManageStudentLoginComp());
+    	content.addComponent(new ManageStudentViewComp());
     	
     }
     

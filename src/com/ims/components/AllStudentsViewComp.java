@@ -51,7 +51,7 @@ public class AllStudentsViewComp extends CustomComponent{
 			
 			Button viewStudent=new Button("All Details");
 			
-			table.addItem(new Object[] {index,studentList.get(x).getNameInFull(),studentList.get(x).getEmail(),studentList.get(x).getMobile1(),"not set yet",viewStudent},index);
+			table.addItem(new Object[] {index,studentList.get(x).getNameInFull(),studentList.get(x).getEmail(),studentList.get(x).getMobile(),"not set yet",viewStudent},index);
 			
 			
 			viewStudent.setData(studentList.get(x).getStudentUserName().replace(' ', '_'));

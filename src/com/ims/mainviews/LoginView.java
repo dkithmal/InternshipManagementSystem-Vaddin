@@ -15,15 +15,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.BaseTheme;
@@ -35,7 +27,7 @@ public class LoginView extends VerticalLayout implements View{
 	
 	CssLayout root = new CssLayout();
 	CssLayout mainMenu = new CssLayout();
-	CssLayout content = new CssLayout();
+    CssLayout content = new CssLayout();
 	
 	VerticalLayout loginLayout;
 	
@@ -851,6 +843,7 @@ public class LoginView extends VerticalLayout implements View{
         root.addComponent(content);
         content.setSizeFull();
         content.addStyleName("content");
+
         
         
         //setting foter in mainview
