@@ -18,8 +18,12 @@ import java.util.Collection;
  */
 public class StudentCvViewComp extends CustomComponent {
 
-    AbsoluteLayout mainLayout;
+    VerticalLayout mainLayout;
     VerticalLayout cvViewLayout;
+    Panel mainLayoutPanel= new Panel();
+
+
+
     final Embedded image = new Embedded("");
     public File file;
     FileInputStream fis = null;
@@ -41,7 +45,11 @@ public class StudentCvViewComp extends CustomComponent {
         }
 
         buildStudentCvView();
-        setCompositionRoot(mainLayout);
+
+        mainLayoutPanel.setContent(mainLayout);
+        mainLayoutPanel.setSizeFull();
+        mainLayoutPanel.addStyleName("mainLayoutPanel");
+        setCompositionRoot(mainLayoutPanel);
 
     }
 
@@ -49,17 +57,13 @@ public class StudentCvViewComp extends CustomComponent {
 
     private void buildStudentCvView()
     {
-        mainLayout= new AbsoluteLayout();
+        mainLayout= new VerticalLayout();
         mainLayout.setSizeFull();
 
 
         cvViewLayout = new VerticalLayout();
         cvViewLayout.setSizeFull();
         cvViewLayout.setSpacing(true);
-
-
-        Panel cvViewPanel= new Panel();
-        cvViewPanel.setHeight("100%");
 
 
         Label studentCvMainHeader=new Label(student.getNameInFull()+" | Curriculum Vitae");
@@ -254,6 +258,7 @@ public class StudentCvViewComp extends CustomComponent {
             studentQulification.addStyleName("studentCvContent");
 
             cvViewLayout.addComponent(studentQulification);
+            cvViewLayout.setExpandRatio(studentQulification,1);
 
         }
 
@@ -262,13 +267,9 @@ public class StudentCvViewComp extends CustomComponent {
 
 
 
-        Label fotter=new  Label("");
-        cvViewLayout.addComponent(fotter);
-        cvViewLayout.setExpandRatio(fotter,1);
 
-
-        cvViewPanel.setContent(cvViewLayout);
-        mainLayout.addComponent(cvViewPanel,"bottom:75px;left: 0px; top: 0px;right:0px");
+        mainLayout.addComponent(cvViewLayout);
+        mainLayout.setExpandRatio(cvViewLayout,1);
 
 
     }

@@ -35,7 +35,7 @@ public class StudentCompanyView extends CssLayout implements View{
 			
 		}
 		
-		else if (event.getParameters().equals("appplied_companies"))
+		else if (event.getParameters().equals("applied_companies"))
 		{
 			buildAppliedComapnyView();
 			
@@ -89,7 +89,7 @@ public class StudentCompanyView extends CssLayout implements View{
     	                   });
 
     	                
-    	                final Button appliedCompanies = new Button("Applied Compnanies");
+    	                final Button appliedCompanies = new Button("Applied Companies");
     	                appliedCompanies.setStyleName(BaseTheme.BUTTON_LINK);
     	                addComponent(appliedCompanies);
     	                
@@ -97,7 +97,7 @@ public class StudentCompanyView extends CssLayout implements View{
     	                    @Override
     	                    public void buttonClick(ClickEvent event) {
     	                    	
-    	                    	getUI().getNavigator().navigateTo("/company/appplied_companies");
+    	                    	getUI().getNavigator().navigateTo("/company/applied_companies");
 
 
     	                    }
@@ -180,14 +180,14 @@ public class StudentCompanyView extends CssLayout implements View{
     
     
     
-    private void buildCompanyProfileView(String comapnyName)
+    private void buildCompanyProfileView(String companyName)
     {
     	System.out.println("its in build company profile view");
     	content.removeAllComponents();
     	companyDAO=(CompanyDAO)ImsUI.context.getBean("AccessCompany");
-    	if(companyDAO.getCompanyState(comapnyName))
-    		content.addComponent(new CompanyProfileViewComp(comapnyName,"name"));
-    	else if(!comapnyName.equals(""))
+    	if(companyDAO.getCompanyState(companyName))
+    		content.addComponent(new CompanyProfileViewComp(companyName,"name"));
+    	else if(!companyName.equals(""))
     		getUI().getNavigator().navigateTo("/home");
 
     }

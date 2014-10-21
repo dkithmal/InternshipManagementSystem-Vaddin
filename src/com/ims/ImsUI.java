@@ -37,7 +37,7 @@ public class ImsUI extends UI {
 		
 		navigator = new Navigator(this, this);    
 		navigator.addView("", LoginView.class);
-        navigator.addView("/newcompany", CompanyRegisterView.class);
+        navigator.addView("/new_company", CompanyRegisterView.class);
        
         
 

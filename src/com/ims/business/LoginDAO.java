@@ -45,7 +45,7 @@ public class LoginDAO {
 
         if(list.size()>0)
         {
-            return list.get(0).isAllowStudnetToLog();
+            return list.get(0).isAllowStudentToLog();
 
         }
         else
@@ -60,11 +60,8 @@ public class LoginDAO {
 	public String findUser(String userName,String password)
 	{
 		Session session = getSessionFactory().openSession();
-		String hql = " from User u where u.userName=? and u.password=? ";
-		Query query = session.createQuery(hql);
-		
-
-		List<User> usersList = query.setString(0, userName).setString(1, password).list();
+        System.out.println("User Name   "+userName);
+        List<User> usersList=session.createQuery(" from User u where u.userName=? and u.password=? ").setParameter(0,userName).setParameter(1, password).list();
 		if(usersList.size()>0)
 		{
 			if(usersList.get(0).getType()=='a')
@@ -141,7 +138,7 @@ public class LoginDAO {
 				}
 
 				session.close();
-				return "Comany-NotAllowed";
+				return "Company-NotAllowed";
 				//return "notallowedCompany";
 				
 			}

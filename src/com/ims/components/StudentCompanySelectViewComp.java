@@ -112,26 +112,5 @@ public class StudentCompanySelectViewComp extends CustomComponent {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

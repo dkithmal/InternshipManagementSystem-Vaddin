@@ -17,7 +17,7 @@ public class Administration {
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private int administrationId;
 	private int currentBatch;
-    private boolean allowStudnetToLog;
+    private boolean allowStudentToLog;
     private int applicableCompanyCount;
 
 
@@ -43,12 +43,12 @@ public int getAdministrationId() {
 	public void setCurrentBatch(int batch) {
 		this.currentBatch = batch;
 	}
-    public boolean isAllowStudnetToLog() {
-        return allowStudnetToLog;
+    public boolean isAllowStudentToLog() {
+        return allowStudentToLog;
     }
 
-    public void setAllowStudnetToLog(boolean allowStudnetToLog) {
-        this.allowStudnetToLog = allowStudnetToLog;
+    public void setAllowStudentToLog(boolean allowStudnetToLog) {
+        this.allowStudentToLog = allowStudnetToLog;
     }
 
     public int getApplicableCompanyCount() {

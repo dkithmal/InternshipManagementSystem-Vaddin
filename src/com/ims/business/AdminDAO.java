@@ -121,7 +121,7 @@ public class AdminDAO {
         if(list.size()>0)
         {
             Administration administration= list.get(0);
-            administration.setAllowStudnetToLog(true);
+            administration.setAllowStudentToLog(true);
 
             Session session2 = getSessionFactory().openSession();
             session2.beginTransaction();
@@ -134,7 +134,7 @@ public class AdminDAO {
         {
 
             Administration administration= new Administration();
-            administration.setAllowStudnetToLog(true);
+            administration.setAllowStudentToLog(true);
             Session session2 = getSessionFactory().openSession();
             session2.beginTransaction();
             session2.save(administration);
@@ -158,7 +158,7 @@ public class AdminDAO {
         if(list.size()>0)
         {
             Administration administration= list.get(0);
-            administration.setAllowStudnetToLog(false);
+            administration.setAllowStudentToLog(false);
 
             Session session2 = getSessionFactory().openSession();
             session2.beginTransaction();
@@ -171,7 +171,7 @@ public class AdminDAO {
         {
 
             Administration administration= new Administration();
-            administration.setAllowStudnetToLog(false);
+            administration.setAllowStudentToLog(false);
             Session session2 = getSessionFactory().openSession();
             session2.beginTransaction();
             session2.save(administration);
@@ -194,7 +194,7 @@ public class AdminDAO {
         if(list.size()>0)
         {
 
-            return list.get(0).isAllowStudnetToLog();
+            return list.get(0).isAllowStudentToLog();
 
         }
         else

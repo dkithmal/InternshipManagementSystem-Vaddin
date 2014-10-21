@@ -17,20 +17,8 @@ import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.TextArea;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Upload;
 import com.vaadin.ui.Upload.ChangeEvent;
 import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Upload.Receiver;
@@ -39,7 +27,8 @@ import com.vaadin.ui.Upload.SucceededListener;
 
 public class StudentCvFormComp extends CustomComponent {
 	
-	AbsoluteLayout mainLayout;
+	VerticalLayout mainLayout;
+    Panel mainLayoutPanel= new Panel();
 	
 	final BeanFieldGroup<Student> binder = new BeanFieldGroup<Student>(Student.class);
 	ImageUploader receiver = new ImageUploader(); 
@@ -166,27 +155,29 @@ public class StudentCvFormComp extends CustomComponent {
 		
 		
 		buildStudentCVForm();
-		setCompositionRoot(mainLayout);
+        mainLayoutPanel.setContent(mainLayout);
+        mainLayoutPanel.setSizeFull();
+        mainLayoutPanel.addStyleName("mainLayoutPanel");
+        setCompositionRoot(mainLayoutPanel);
 		
 		
 	}
 	
 	private void buildStudentCVForm()
 	{
-		mainLayout= new AbsoluteLayout();
+		mainLayout= new VerticalLayout();
 		mainLayout.setSizeFull();
 		
 		binder.bindMemberFields(this);
 		
 
-		Panel companyRegisterFormPanel= new Panel();
-		//set height to 90% other wise not visible last content of the panal
-		companyRegisterFormPanel.setHeight("100%");	
 		
 
 		Label studentRegiLable= new Label("Student CV Creation Form");
 		studentRegiLable.addStyleName("comRegiLable");
-		mainLayout.addComponent(studentRegiLable,"left:40%; top: 5px");
+        studentRegiLable.setSizeUndefined();
+		mainLayout.addComponent(studentRegiLable);
+        mainLayout.setComponentAlignment(studentRegiLable,Alignment.TOP_CENTER);
 		
 		
 		
@@ -971,12 +962,9 @@ public class StudentCvFormComp extends CustomComponent {
 		    }
 		}));
 
-		
-		companyRegisterFormPanel.setContent(registrationForm);
 
-		//mainLayout.addComponent(companyRegisterFormPanel);
-		//mainLayout.setExpandRatio(companyRegisterFormPanel, 1);
-		mainLayout.addComponent(companyRegisterFormPanel,"bottom:75px;left: 0px; top: 40px;right:0px");
+		mainLayout.addComponent(registrationForm);
+        mainLayout.setExpandRatio(registrationForm,1);
 
 		//mainLayout.addComponent(layout);
 		

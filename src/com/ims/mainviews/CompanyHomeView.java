@@ -5,17 +5,14 @@ import com.ims.components.UpdateCompanyProfileComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.BaseTheme;
 
 public class CompanyHomeView extends CssLayout implements View{
 	CssLayout content = new CssLayout();
+    Panel contentPanel= new Panel();
 
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -49,7 +46,7 @@ public class CompanyHomeView extends CssLayout implements View{
         	
     	addComponent(new HorizontalLayout(){
     		{
-    			 setSizeFull();
+    			setSizeFull();
     			addComponent(new VerticalLayout(){
     				{
     					
@@ -74,29 +71,11 @@ public class CompanyHomeView extends CssLayout implements View{
     	                   });
 
     	                
-/*    	                final Button summary = new Button("Update Vacancies");
-    	                summary.setStyleName(BaseTheme.BUTTON_LINK);
-    	                addComponent(summary);
-    	                
-    	                summary.addClickListener(new ClickListener() {
-    	                    @Override
-    	                    public void buttonClick(ClickEvent event) {
-    	                    	
-    	                    	getUI().getNavigator().navigateTo("/home/update_vacancies");
+    	                final Button updateProfile = new Button("Update Profile");
+                        updateProfile.setStyleName(BaseTheme.BUTTON_LINK);
+    	                addComponent(updateProfile);
 
-
-    	                    }
-    	                    
-    	                
-    	                   });
-*/
-    	                
-    	                
-    	                final Button messages = new Button("Update Profile"); 
-    	                messages.setStyleName(BaseTheme.BUTTON_LINK);
-    	                addComponent(messages);
-    	                
-    	                messages.addClickListener(new ClickListener() {
+                        updateProfile.addClickListener(new ClickListener() {
     	                    @Override
     	                    public void buttonClick(ClickEvent event) {
     	                    	
@@ -108,7 +87,7 @@ public class CompanyHomeView extends CssLayout implements View{
     	                
     	                   });
     	                
-    	                setExpandRatio(messages, 1);
+    	                setExpandRatio(updateProfile, 1);
     	                
 
     				}
@@ -116,10 +95,14 @@ public class CompanyHomeView extends CssLayout implements View{
     			});
     			
     			
-    			addComponent(content);
+    			//addComponent(content);
     			content.setSizeFull();
     			content.addStyleName("subcontent");
-    			setExpandRatio(content, 1);
+               // setExpandRatio(content, 1);
+                addComponent(contentPanel);
+                contentPanel.setSizeFull();
+                setExpandRatio(contentPanel,1);
+
     			
     			buildMainView();
     			
@@ -144,8 +127,11 @@ public class CompanyHomeView extends CssLayout implements View{
     
     private void buildViewProfileView()
     {
-    	content.removeAllComponents();
-    	content.addComponent(new CompanyProfileViewComp(VaadinSession.getCurrent().getAttribute("UserName").toString(), "userName"));
+        content.removeAllComponents();
+        content.addComponent(new CompanyProfileViewComp(VaadinSession.getCurrent().getAttribute("UserName").toString(), "userName"));
+        contentPanel.setContent(content);
+
+
     	
     }
     
@@ -160,6 +146,7 @@ public class CompanyHomeView extends CssLayout implements View{
     {
     	content.removeAllComponents();
     	content.addComponent(new UpdateCompanyProfileComp());
+        contentPanel.setContent(content);
     	
     }
     

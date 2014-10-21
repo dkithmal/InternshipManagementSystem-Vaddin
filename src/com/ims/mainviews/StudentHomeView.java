@@ -118,7 +118,7 @@ public class StudentHomeView  extends CssLayout implements View{
 
                         });
 
-                        final Button applycompany = new Button("Apply Companyies");
+                        final Button applycompany = new Button("Apply Companies");
                         applycompany.setStyleName(BaseTheme.BUTTON_LINK);
                         addComponent(applycompany);
 
