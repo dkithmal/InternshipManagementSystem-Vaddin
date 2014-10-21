@@ -22,22 +22,9 @@ import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Embedded;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextArea;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Upload;
 import com.vaadin.ui.Upload.ChangeEvent;
 import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Upload.Receiver;
@@ -46,7 +33,7 @@ import com.vaadin.ui.Upload.SucceededListener;
 
 public class CompanyRegistrationFormComp extends CustomComponent{
 	
-	AbsoluteLayout mainLayout;
+	VerticalLayout mainLayout;
 	final Embedded image = new Embedded("Uploaded Profile Picture");
 	
 	final BeanFieldGroup<Company> binder = new BeanFieldGroup<Company>(Company.class);
@@ -67,7 +54,7 @@ public class CompanyRegistrationFormComp extends CustomComponent{
 	
 	private void build()
 	{
-		mainLayout= new AbsoluteLayout();
+		mainLayout= new VerticalLayout();
 		mainLayout.setSizeFull();
 		
 		registerCompanyDAO= (RegisterCompanyDAO)ImsUI.context.getBean("RegisterComapny");
@@ -84,7 +71,7 @@ public class CompanyRegistrationFormComp extends CustomComponent{
         	
 
         	
-        	if(f.equals("/newcompany"))
+        	if(f.equals("/new_company"))
         	{
         		
         		 Company company = new Company();	        
@@ -149,7 +136,7 @@ public class CompanyRegistrationFormComp extends CustomComponent{
 	
 	public void buildRegistrationFomView()
 	{
-		
+
 
 		Panel companyRegisterFormPanel= new Panel();
 		//set height to 90% other wise not visible last content of the panal
@@ -157,7 +144,7 @@ public class CompanyRegistrationFormComp extends CustomComponent{
 
 		//VerticalLayout layout = new VerticalLayout();
 		//layout.setSizeFull();
-		
+
 		FormLayout registrationForm = new FormLayout();
 
 
@@ -225,7 +212,7 @@ public class CompanyRegistrationFormComp extends CustomComponent{
 		
 		Label comRegiLable= new Label("Company Registration Form");
 		comRegiLable.addStyleName("comRegiLable");
-		mainLayout.addComponent(comRegiLable,"left:40%; top: 5px");
+		mainLayout.addComponent(comRegiLable);
 
 
 		
@@ -409,12 +396,11 @@ public class CompanyRegistrationFormComp extends CustomComponent{
 
 
 		//mainLayout.addComponent(companyRegisterFormPanel,"bottom:75px;left: 0px; top: 40px;right:0px");
-		mainLayout.addComponent(companyRegisterFormPanel,"bottom:75px;left: 0px; top: 40px;right:0px");
+		mainLayout.addComponent(companyRegisterFormPanel);
+        mainLayout.setExpandRatio(companyRegisterFormPanel,1);
 
 
-		  
-		  
-		
+
 		
 	}
 	

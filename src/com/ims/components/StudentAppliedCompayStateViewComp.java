@@ -4,10 +4,7 @@ import com.ims.ImsUI;
 import com.ims.business.StudentAppliedCompanyDAO;
 import com.ims.data.StudentAppliedCompany;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.*;
 
 import java.util.List;
 
@@ -16,7 +13,7 @@ import java.util.List;
  */
 public class StudentAppliedCompayStateViewComp extends CustomComponent {
 
-    AbsoluteLayout mainLayout;
+    VerticalLayout mainLayout;
     List<StudentAppliedCompany> studentAppliedCompanyList;
 
 
@@ -31,7 +28,7 @@ public class StudentAppliedCompayStateViewComp extends CustomComponent {
 
     private void buildStudentAppliedCompanyStateView()
     {
-        mainLayout= new AbsoluteLayout();
+        mainLayout= new VerticalLayout();
         mainLayout.setSizeFull();
 
 
@@ -70,7 +67,7 @@ public class StudentAppliedCompayStateViewComp extends CustomComponent {
 
         }
 
-        mainLayout.addComponent(table,"bottom:75px;left: 0px; top: 0px;right:0px");
+        mainLayout.addComponent(table);
 
 
 

@@ -3,10 +3,7 @@ package com.ims.components;
 import com.ims.ImsUI;
 import com.ims.business.CompanyDAO;
 import com.ims.data.Company;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.*;
 
 import java.util.List;
 
@@ -14,7 +11,7 @@ import java.util.List;
  * Created by Damitha on 10/10/14.
  */
 public class ManageCompanyCvViewComp extends CustomComponent{
-    AbsoluteLayout mainLayout = new AbsoluteLayout();
+    VerticalLayout mainLayout = new VerticalLayout();
     String companyCvAllowedState;
     List<Company> companyList;
 
@@ -99,7 +96,7 @@ public class ManageCompanyCvViewComp extends CustomComponent{
 
         }
 
-        mainLayout.addComponent(table,"bottom:75px;left: 0px; top: 0px;right:0px");
+        mainLayout.addComponent(table);
 
 
 

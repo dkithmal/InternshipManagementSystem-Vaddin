@@ -6,16 +6,13 @@ import com.ims.ImsUI;
 import com.ims.business.CompanyDAO;
 import com.ims.data.Company;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Table;
 
 public class AllowedCompanyViewComp extends CustomComponent{
 	
 	
-	AbsoluteLayout mainLayout;
+	VerticalLayout mainLayout;
 	List<Company> companyList;
 	
 	public AllowedCompanyViewComp()
@@ -32,7 +29,7 @@ public class AllowedCompanyViewComp extends CustomComponent{
 	
 	private void buildAllowedComapnyView()
 	{
-		mainLayout= new AbsoluteLayout();
+		mainLayout= new VerticalLayout();
 		mainLayout.setSizeFull();
 		
 		
@@ -102,7 +99,7 @@ public class AllowedCompanyViewComp extends CustomComponent{
 		}
 
 		
-		mainLayout.addComponent(table,"bottom:75px;left: 0px; top: 0px;right:0px");
+		mainLayout.addComponent(table);
 		
 	}
 	

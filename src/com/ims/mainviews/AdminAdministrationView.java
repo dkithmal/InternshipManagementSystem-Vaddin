@@ -1,8 +1,8 @@
 package com.ims.mainviews;
 
-import com.ims.components.ChangeAdminProfileComp;
+import com.ims.components.ManageStudentComp;
+import com.ims.components.UpdateAdminProfileComp;
 import com.ims.components.CreateStudentProfileViewComp;
-import com.ims.components.ManageStudentViewComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
@@ -181,14 +181,14 @@ public class AdminAdministrationView extends CssLayout implements View{
     private void buildManageStudentLoginView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new ManageStudentViewComp());
+    	content.addComponent(new ManageStudentComp());
     	
     }
     
     private void buildChangeusernamePassowrdnView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new ChangeAdminProfileComp());
+    	content.addComponent(new UpdateAdminProfileComp());
     	
     }
 

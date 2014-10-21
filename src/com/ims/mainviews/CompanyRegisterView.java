@@ -28,7 +28,6 @@ public class CompanyRegisterView extends VerticalLayout implements View{
 	
 	
 	CssLayout root = new CssLayout();
-	CssLayout mainMenu = new CssLayout();
 	CssLayout content = new CssLayout();
 	
 	VerticalLayout loginLayout;
@@ -51,18 +50,18 @@ public class CompanyRegisterView extends VerticalLayout implements View{
        
         } else {
 
-        	if(f.equals("/newcompany/aboutus"))
+        	if(f.equals("/new_company/aboutus"))
         	{        		
         		 buildAboutUs();
         		
         	}
         		       		
-        	if(f.equals("/newcompany/contactus"))
+        	if(f.equals("/new_company/contactus"))
             {
         		buildContactUs();
 
         	}
-        	if(f.equals("/newcompany/support"))
+        	if(f.equals("/new_company/support"))
             {
         		buildSupport();
         		
@@ -135,7 +134,7 @@ public class CompanyRegisterView extends VerticalLayout implements View{
                     public void buttonClick(ClickEvent event) {
                     	
 
-                    	getUI().getNavigator().navigateTo("/newcompany");
+                    	getUI().getNavigator().navigateTo("/new_company");
 
 
                     }
@@ -151,7 +150,7 @@ public class CompanyRegisterView extends VerticalLayout implements View{
                     @Override
                     public void buttonClick(ClickEvent event) {
                     	                
-                    	getUI().getNavigator().navigateTo("/newcompany/aboutus");
+                    	getUI().getNavigator().navigateTo("/new_company/aboutus");
 
 
                     }
@@ -167,7 +166,7 @@ public class CompanyRegisterView extends VerticalLayout implements View{
                     @Override
                     public void buttonClick(ClickEvent event) {
 
-                    	getUI().getNavigator().navigateTo("/newcompany/contactus");
+                    	getUI().getNavigator().navigateTo("/new_company/contactus");
 
 
                     }
@@ -183,7 +182,7 @@ public class CompanyRegisterView extends VerticalLayout implements View{
                     @Override
                     public void buttonClick(ClickEvent event) {
                     	
-                    	getUI().getNavigator().navigateTo("/newcompany/support");
+                    	getUI().getNavigator().navigateTo("/new_company/support");
 
 
                     }
@@ -244,7 +243,7 @@ public class CompanyRegisterView extends VerticalLayout implements View{
         }*/
         
 
-        if(f.equals("/newcompany"))
+        if(f.equals("/new_company"))
         {
         	buildRegistrationForm();
         	

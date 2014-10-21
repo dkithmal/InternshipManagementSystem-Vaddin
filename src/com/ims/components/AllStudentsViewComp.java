@@ -5,15 +5,12 @@ import java.util.List;
 import com.ims.ImsUI;
 import com.ims.business.StudentDAO;
 import com.ims.data.Student;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 
 public class AllStudentsViewComp extends CustomComponent{
 	
-	AbsoluteLayout mainLayout;
+	VerticalLayout mainLayout;
 	
 	
 	public AllStudentsViewComp()
@@ -26,7 +23,7 @@ public class AllStudentsViewComp extends CustomComponent{
 	private void buildAllStudentView()
 	{
 		
-		mainLayout= new AbsoluteLayout();
+		mainLayout= new VerticalLayout();
 		mainLayout.setSizeFull();
 		
 		
@@ -66,7 +63,7 @@ public class AllStudentsViewComp extends CustomComponent{
 		}
 
 		
-		mainLayout.addComponent(table,"bottom:75px;left: 0px; top: 0px;right:0px");
+		mainLayout.addComponent(table);
 		
 	}
 

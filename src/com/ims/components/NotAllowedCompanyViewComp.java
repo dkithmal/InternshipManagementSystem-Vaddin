@@ -5,15 +5,12 @@ import java.util.List;
 import com.ims.ImsUI;
 import com.ims.business.CompanyDAO;
 import com.ims.data.Company;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 
 public class NotAllowedCompanyViewComp extends CustomComponent{
-	
-	AbsoluteLayout mainLayout;
+
+    VerticalLayout mainLayout;
 	
 	public NotAllowedCompanyViewComp()
 	{
@@ -27,7 +24,7 @@ public class NotAllowedCompanyViewComp extends CustomComponent{
 	
 	private void buildNotAllowedCompanyView()
 	{
-		mainLayout= new AbsoluteLayout();
+		mainLayout= new VerticalLayout();
 		mainLayout.setSizeFull();
 		
 		
@@ -93,7 +90,7 @@ public class NotAllowedCompanyViewComp extends CustomComponent{
 		}
 
 		
-		mainLayout.addComponent(table,"bottom:75px;left: 0px; top: 0px;right:0px");
+		mainLayout.addComponent(table);
 		
 		
 	}

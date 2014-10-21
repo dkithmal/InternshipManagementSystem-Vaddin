@@ -3,7 +3,7 @@ package com.ims.mainviews;
 import com.ims.ImsUI;
 import com.ims.business.StudentAppliedCompanyDAO;
 import com.ims.components.StudentCvViewComp;
-import com.ims.components.StudentDetailsViewComp;
+import com.ims.components.StudentDetailsComp;
 import com.ims.components.UpdateCompanyVacancyComp;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -195,14 +195,14 @@ public class CompanyInternshipView extends CssLayout implements View{
     private void buildAllAppliedStudentView()
     {
     	content.removeAllComponents();
-    	content.addComponent(new StudentDetailsViewComp("All"));
+    	content.addComponent(new StudentDetailsComp("All"));
     	
     }
     
     private void buildNotSelctedStudentsForInterview()
     {
     	content.removeAllComponents();
-    	content.addComponent(new StudentDetailsViewComp("NotSelectedForInterview"));
+    	content.addComponent(new StudentDetailsComp("NotSelectedForInterview"));
     	
     }
     
@@ -210,14 +210,14 @@ public class CompanyInternshipView extends CssLayout implements View{
     private void buildSelctedStudentsForInterview()
     {
     	content.removeAllComponents();
-    	content.addComponent(new StudentDetailsViewComp("SelectedForInterview"));
+    	content.addComponent(new StudentDetailsComp("SelectedForInterview"));
     	
     }
     
     private void buildSelectedStudentsForInternship()
     {
     	content.removeAllComponents();
-    	content.addComponent(new StudentDetailsViewComp("SelectedForInternship"));
+    	content.addComponent(new StudentDetailsComp("SelectedForInternship"));
     	
     }
     
